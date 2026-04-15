@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fafafa;
+  --text: #171717;
+  --text-secondary: #525252;
+  --border: #e5e5e5;
+  --accent: #65a30d;
+}
+
+.dark {
+  --bg: #0f172a;
+  --text: #fafafa;
+  --text-secondary: #a3a3a3;
+  --border: #262626;
+  --accent: #a3e635;
+}
 
 @theme {
   --font-rubik: 'Rubik', sans-serif;
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
 }
 
 body {
-  @apply font-rubik bg-slate-800 text-white;
+  @apply font-rubik bg-bg text-text;
 }

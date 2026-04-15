@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import TheSidebar from './components/TheSidebar.vue';
+</script>
+
 <template>
-  <h1>Note Flow</h1>
+  <div class="flex h-screen gap-2">
+    <TheSidebar />
+    <main>MAIN</main>
+  </div>
 </template>
