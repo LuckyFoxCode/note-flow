@@ -5,18 +5,20 @@
 
 :root {
   --bg: #fafafa;
-  --text: #171717;
+  --text: #1f2937;
   --text-secondary: #525252;
   --border: #e5e5e5;
-  --accent: #65a30d;
+  --accent: #15803d;
+  --active-nav: #334155;
 }
 
-.dark {
+[data-theme='dark'] {
   --bg: #0f172a;
   --text: #fafafa;
   --text-secondary: #a3a3a3;
   --border: #262626;
   --accent: #a3e635;
+  --active-nav: #334155;
 }
 
 @theme {
@@ -25,6 +27,7 @@
   --color-text: var(--text);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-active-nav: var(--active-nav);
 }
 
 body {
