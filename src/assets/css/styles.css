@@ -8,8 +8,8 @@
   --text: #1f2937;
   --text-secondary: #525252;
   --border: #e5e5e5;
-  --accent: #15803d;
-  --active-nav: #334155;
+  --accent: #22c55e;
+  --active-nav: #64748b;
 }
 
 [data-theme='dark'] {
@@ -32,4 +32,8 @@
 
 body {
   @apply font-rubik bg-bg text-text;
+}
+
+.sidebar-btn {
+  @apply hover:border-accent hover:text-accent rounded-lg border-2 border-transparent transition outline-none focus-within:border-blue-500;
 }

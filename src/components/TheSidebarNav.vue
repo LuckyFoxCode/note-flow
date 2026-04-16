@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NAV_ITEM } from '@/consts';
 
-const { isOpenSidebar } = defineProps<{ isOpenSidebar: boolean }>();
+const { compact } = defineProps<{ compact: boolean }>();
 </script>
 
 <template>
@@ -9,20 +9,20 @@ const { isOpenSidebar } = defineProps<{ isOpenSidebar: boolean }>();
     <ul class="flex flex-col gap-y-1">
       <li
         v-for="item in NAV_ITEM"
-        :key="item.text"
+        :key="item.name"
       >
-        <a
-          :href="item.href"
-          class="flex items-center gap-x-1 rounded-lg p-2 transition hover:border-transparent hover:bg-slate-600 hover:text-white"
-          :class="item.active ? 'bg-active-nav text-white' : ''"
+        <router-link
+          v-slot="{ isExactActive }"
+          :to="{ name: item.name }"
+          class="flex items-center gap-x-1 rounded-lg border border-transparent px-1.5 py-2 transition-colors outline-none focus-within:border-blue-500 hover:bg-slate-600 hover:text-white"
+          active-class="bg-active-nav text-white"
         >
           <component
             :is="item.icon"
-            class="size-6"
-            :class="item.active ? 'text-lime-300' : ''"
+            :class="['size-6', isExactActive ? 'text-lime-300' : '']"
           />
-          <span v-if="isOpenSidebar">{{ item.text }}</span>
-        </a>
+          <span v-if="compact">{{ item.name }}</span>
+        </router-link>
       </li>
     </ul>
   </nav>

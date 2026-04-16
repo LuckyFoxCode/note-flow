@@ -7,35 +7,38 @@ import TheSidebarNav from './TheSidebarNav.vue';
 
 const { toggle, theme } = useTheme();
 
-const isOpenSidebar = ref(true);
+const isCollapsed = ref(false);
 
 function toggleSidebar() {
-  isOpenSidebar.value = !isOpenSidebar.value;
+  isCollapsed.value = !isCollapsed.value;
 }
 </script>
 
 <template>
   <aside
-    :class="isOpenSidebar ? 'w-60' : 'w-10'"
-    class="border-border flex flex-col items-center gap-y-4 border-r transition-[width]"
+    :class="[
+      'border-border bg-bg fixed top-0 left-0 z-50 flex h-full flex-col items-center gap-y-4 border-r transition-[width,transform] duration-200',
+      'md:relative md:translate-x-0 md:pb-1',
+      isCollapsed ? 'w-40 lg:w-60' : 'w-10',
+    ]"
   >
-    <TheSidebarLogo :is-open-sidebar="isOpenSidebar" />
-    <TheSidebarNav :is-open-sidebar="isOpenSidebar" />
+    <TheSidebarLogo :compact="isCollapsed" />
+    <TheSidebarNav :compact="isCollapsed" />
     <div class="flex w-full flex-col gap-y-1">
       <button
-        class="hover:border-accent hover:text-accent flex w-full cursor-pointer justify-center rounded-lg border-2 border-transparent py-1 transition"
+        class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
+        @click="toggleSidebar"
+      >
+        <IconBurger class="size-5" />
+      </button>
+      <button
+        class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
         @click="toggle"
       >
         <component
           :is="theme === 'dark' ? IconMoon : IconSun"
           class="size-5"
         />
-      </button>
-      <button
-        class="hover:border-accent hover:text-accent flex w-full cursor-pointer justify-center rounded-lg border-2 border-transparent py-1 transition"
-        @click="toggleSidebar"
-      >
-        <IconBurger class="size-5" />
       </button>
     </div>
   </aside>

@@ -1,8 +1,7 @@
 import type { Component } from 'vue';
+import type { RouteRecordName } from 'vue-router';
 
 export interface NavItem {
-  text: string;
+  name: RouteRecordName;
   icon: Component;
-  href: string;
-  active?: boolean;
 }
