@@ -13,7 +13,7 @@ const isMobileOpen = ref(true);
       @click="isMobileOpen = false"
     />
     <TheSidebar />
-    <main class="ml-10 md:ml-0">
+    <main class="ml-10 w-full md:ml-0">
       <router-view v-slot="{ Component }">
         <transition
           name="fade"
