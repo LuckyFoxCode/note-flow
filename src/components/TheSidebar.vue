@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { IconBurger, IconMoon, IconSun } from '@/assets/icons';
 import { useTheme } from '@/composables';
-import { ref } from 'vue';
 import TheSidebarLogo from './TheSidebarLogo.vue';
 import TheSidebarNav from './TheSidebarNav.vue';
 
+const { isCollapsed } = defineProps<{ isCollapsed: boolean }>();
+
+const emit = defineEmits(['toggleSidebar']);
+
 const { toggle, theme } = useTheme();
-
-const isCollapsed = ref(false);
-
-function toggleSidebar() {
-  isCollapsed.value = !isCollapsed.value;
-}
 </script>
 
 <template>
@@ -27,7 +24,7 @@ function toggleSidebar() {
     <div class="flex w-full flex-col gap-y-1">
       <button
         class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
-        @click="toggleSidebar"
+        @click="emit('toggleSidebar')"
       >
         <IconBurger class="size-5" />
       </button>

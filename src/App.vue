@@ -1,18 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import TheSidebar from './components/TheSidebar.vue';
 
-const isMobileOpen = ref(true);
+const isMobile = ref(false);
+const isCollapsed = ref(false);
+const mediaQuery = window.matchMedia('(max-width: 639px)');
+
+const handleMediaChange = (event: MediaQueryListEvent) => {
+  isMobile.value = event.matches;
+};
+
+const toggleSidebar = () => (isCollapsed.value = !isCollapsed.value);
+
+onMounted(() => {
+  isMobile.value = mediaQuery.matches;
+  mediaQuery.addEventListener('change', handleMediaChange);
+});
+
+onUnmounted(() => {
+  mediaQuery.removeEventListener('change', handleMediaChange);
+});
 </script>
 
 <template>
   <div class="relative flex h-screen">
     <div
-      v-if="isMobileOpen"
+      v-if="isCollapsed && isMobile"
       class="fixed inset-0 top-0 left-0 z-40 h-full w-full bg-slate-950/80 md:hidden"
-      @click="isMobileOpen = false"
+      @click="isCollapsed = false"
     />
-    <TheSidebar />
+    <TheSidebar
+      :is-collapsed="isCollapsed"
+      @toggle-sidebar="toggleSidebar"
+    />
     <main class="ml-10 w-full md:ml-0">
       <router-view v-slot="{ Component }">
         <transition
