@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import TheOverlay from './components/TheOverlay.vue';
 import TheSidebar from './components/TheSidebar.vue';
 
-const isMobile = ref(false);
+const mobileMediaQuery = window.matchMedia('(max-width: 639px)');
+const isMobile = ref(mobileMediaQuery.matches);
 const isCollapsed = ref(false);
-const mediaQuery = window.matchMedia('(max-width: 639px)');
+const isOpenOverlay = ref(true);
 
 const handleMediaChange = (event: MediaQueryListEvent) => {
   isMobile.value = event.matches;
@@ -12,14 +14,7 @@ const handleMediaChange = (event: MediaQueryListEvent) => {
 
 const toggleSidebar = () => (isCollapsed.value = !isCollapsed.value);
 
-onMounted(() => {
-  isMobile.value = mediaQuery.matches;
-  mediaQuery.addEventListener('change', handleMediaChange);
-});
-
-onUnmounted(() => {
-  mediaQuery.removeEventListener('change', handleMediaChange);
-});
+onMounted(() => mobileMediaQuery.addEventListener('change', handleMediaChange));
 </script>
 
 <template>
@@ -43,6 +38,7 @@ onUnmounted(() => {
         </transition>
       </router-view>
     </main>
+    <TheOverlay v-if="isOpenOverlay"> FormCategory </TheOverlay>
   </div>
 </template>
 <style scoped>
