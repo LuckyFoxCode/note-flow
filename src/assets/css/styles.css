@@ -10,6 +10,7 @@
   --border: #e5e5e5;
   --accent: #22c55e;
   --active-nav: #64748b;
+  --bg-form: #cbd5e1;
 }
 
 [data-theme='dark'] {
@@ -19,6 +20,7 @@
   --border: #262626;
   --accent: #a3e635;
   --active-nav: #334155;
+  --bg-form: #1e293b;
 }
 
 @theme {
@@ -28,6 +30,7 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-active-nav: var(--active-nav);
+  --color-bg-form: var(--bg-form);
 }
 
 body {

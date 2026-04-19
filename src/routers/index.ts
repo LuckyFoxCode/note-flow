@@ -7,9 +7,15 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/HomeView.vue'),
   },
   {
-    path: '/notes',
-    name: 'Notes',
-    component: () => import('@/views/NotesView.vue'),
+    path: '/categories',
+    name: 'Categories',
+    component: () => import('@/views/CategoriesView.vue'),
+  },
+  {
+    path: '/categories/:slug',
+    name: 'Category',
+    props: true,
+    component: () => import('@/views/CategoryView.vue'),
   },
   {
     path: '/settings',

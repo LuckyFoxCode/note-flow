@@ -3,6 +3,6 @@ import type { NavItem } from '@/types';
 
 export const NAV_ITEM: NavItem[] = [
   { name: 'Home', icon: IconHome },
-  { name: 'Notes', icon: IconNotes },
+  { name: 'Categories', icon: IconNotes },
   { name: 'Settings', icon: IconSettings },
 ];
