@@ -8,7 +8,7 @@ const { compact } = defineProps<{ compact: boolean }>();
   <div class="border-border w-full border-b">
     <router-link
       to="/"
-      class="hover:text-accent focus-within: flex items-center justify-center gap-x-1 rounded-lg border border-transparent py-2 transition-colors outline-none focus-within:border-blue-500"
+      class="hover:text-accent-lime focus-within:border-accent flex items-center justify-center gap-x-1 rounded-lg border-2 border-transparent py-2 transition-colors duration-200 outline-none"
     >
       <IconFox class="size-6" />
       <span v-if="compact">LuckyFoxCode</span>

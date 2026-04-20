@@ -8,12 +8,12 @@ const goToHome = () => router.push('/');
 <template>
   <section class="relative flex h-full w-full flex-col items-center justify-center">
     <span
-      class="text-text/10 absolute top-1/2 left-1/2 z-0 -translate-1/2 text-[160px] md:text-[256px] lg:text-[512px]"
+      class="text-text-secondary/10 absolute top-1/2 left-1/2 z-0 -translate-1/2 text-[160px] md:text-[256px] lg:text-[512px]"
       >404</span
     >
     <div class="z-10 flex w-fit flex-col items-center justify-center gap-y-4 px-1">
-      <h2 class="text-4xl md:text-8xl">Page not found</h2>
-      <p class="text-text/60 text-center md:w-3/4 md:text-3xl lg:w-2/3">
+      <h2 class="text-text text-4xl md:text-8xl">Page not found</h2>
+      <p class="text-text-secondary/90 text-center md:w-3/4 md:text-3xl lg:w-2/3">
         The page you're looking for doesn't exist. Go back to your notes.
       </p>
       <button

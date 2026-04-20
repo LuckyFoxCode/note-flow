@@ -21,22 +21,45 @@ const { toggle, theme } = useTheme();
   >
     <TheSidebarLogo :compact="isCollapsed" />
     <TheSidebarNav :compact="isCollapsed" />
-    <div class="flex w-full flex-col gap-y-1">
+    <div class="border-border mt-auto flex w-full flex-col gap-y-2 border-t pt-2">
       <button
-        class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
+        class="sidebar-btn"
         @click="emit('toggleSidebar')"
       >
-        <IconBurger class="size-5" />
+        <IconBurger class="size-5 transition-transform duration-200 group-active:scale-90" />
       </button>
       <button
         class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
         @click="toggle"
       >
-        <component
-          :is="theme === 'dark' ? IconMoon : IconSun"
-          class="size-5"
-        />
+        <transition
+          name="fade-rotate"
+          mode="out-in"
+        >
+          <component
+            :is="theme === 'dark' ? IconMoon : IconSun"
+            :key="theme"
+            class="size-5"
+          />
+        </transition>
       </button>
     </div>
   </aside>
 </template>
+
+<style scoped>
+.fade-rotate-enter-active,
+.fade-rotate-leave-active {
+  transition: all 0.2s ease;
+}
+
+.fade-rotate-enter-from {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.fade-rotate-leave-to {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+</style>

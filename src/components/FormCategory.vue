@@ -27,9 +27,9 @@ const onSubmit = () => {
 
 <template>
   <div
-    class="bg-bg-form border-border mx-2 flex w-full flex-col rounded-lg border px-2 py-3 shadow-md md:mx-0 md:w-100"
+    class="bg-surface border-border text-text-main mx-2 flex w-full flex-col rounded-lg border px-2 py-3 shadow-lg md:mx-0 md:w-100"
   >
-    <h2 class="text-text mb-3 text-xl">Form category</h2>
+    <h2 class="mb-3 text-xl">Form category</h2>
     <form
       class="flex flex-col gap-y-2"
       @submit.prevent="onSubmit"
@@ -38,12 +38,12 @@ const onSubmit = () => {
         v-model.trim="categoryValue"
         type="text"
         placeholder="Add new category..."
-        class="rounded-lg border border-slate-600 px-3 py-1.5 transition-colors duration-200 outline-none placeholder:text-slate-500 focus-within:border-blue-500"
+        class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
       <button
         :disabled="categoryValue.length < 1"
         type="submit"
-        class="hover:border-accent cursor-pointer rounded-lg border border-slate-600 px-3 py-1.5 transition-colors duration-200 outline-none placeholder:text-slate-500 focus-within:border-blue-500 disabled:cursor-not-allowed"
+        class="hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 text-lg capitalize transition-colors duration-200 outline-none disabled:cursor-not-allowed"
       >
         submit
       </button>

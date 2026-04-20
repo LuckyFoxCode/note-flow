@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, provide, ref } from 'vue';
+import FormCategory from './components/FormCategory.vue';
+import TheOverlay from './components/TheOverlay.vue';
 import TheSidebar from './components/TheSidebar.vue';
 import type { Category } from './types';
-import TheOverlay from './components/TheOverlay.vue';
-import FormCategory from './components/FormCategory.vue';
 
 export interface State {
   categories: Category[];
@@ -44,7 +44,7 @@ onMounted(() => mobileMediaQuery.addEventListener('change', handleMediaChange));
   <div class="relative flex h-screen">
     <div
       v-if="isCollapsed && isMobile"
-      class="fixed inset-0 top-0 left-0 z-40 h-full w-full bg-slate-950/80 md:hidden"
+      class="bg-surface/70 fixed inset-0 top-0 left-0 z-40 h-full w-full backdrop-blur-xs md:hidden"
       @click="isCollapsed = false"
     />
     <TheSidebar

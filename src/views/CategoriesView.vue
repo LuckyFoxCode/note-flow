@@ -10,7 +10,7 @@ const state = inject<State>('state');
   <section class="flex flex-col gap-1">
     <span>Notes Page</span>
     <button
-      class="rounded-lg border-2 bg-slate-800 p-2 text-white"
+      class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
       @click="openOverlay"
     >
       add category

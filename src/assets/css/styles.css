@@ -4,39 +4,49 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: #fafafa;
-  --text: #1f2937;
-  --text-secondary: #525252;
-  --border: #e5e5e5;
-  --accent: #22c55e;
-  --active-nav: #64748b;
-  --bg-form: #cbd5e1;
+  --bg: #ebebf0;
+  --surface: #ffffff;
+  --text-main: #1a1a1c;
+  --text-secondary: #5e5e64;
+  --accent: #3e50e0;
+  --accent-lime: #16a34a;
+  --border: #d1d1d6;
+  --code-bg: #e2e2e9;
+  --success: #28a745;
+  --error: #ea4335;
 }
 
 [data-theme='dark'] {
-  --bg: #0f172a;
-  --text: #fafafa;
-  --text-secondary: #a3a3a3;
-  --border: #262626;
-  --accent: #a3e635;
-  --active-nav: #334155;
-  --bg-form: #1e293b;
+  --bg: #0a0a0a;
+  --surface: #161618;
+  --text-main: #eeeeee;
+  --text-secondary: #a0a0a0;
+  --accent: #5c6cf2;
+  --accent-lime: #a3e635;
+  --border: #2c2c2e;
+  --code-bg: #1e1e20;
+  --success: #34c759;
+  --error: #ff453a;
 }
 
 @theme {
   --font-rubik: 'Rubik', sans-serif;
   --color-bg: var(--bg);
-  --color-text: var(--text);
-  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-text: var(--text-main);
+  --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
-  --color-active-nav: var(--active-nav);
-  --color-bg-form: var(--bg-form);
+  --color-accent-lime: var(--accent-lime);
+  --color-border: var(--border);
+  --color-code-bg: var(--code-bg);
+  --color-success: var(--success);
+  --color-error: var(--error);
 }
 
 body {
-  @apply font-rubik bg-bg text-text;
+  @apply font-rubik bg-bg text-text-main;
 }
 
 .sidebar-btn {
-  @apply hover:border-accent hover:text-accent rounded-lg border-2 border-transparent transition outline-none focus-within:border-blue-500;
+  @apply text-text-secondary hover:bg-surface hover:text-accent-lime flex w-full cursor-pointer justify-center rounded-lg border-2 border-transparent py-2 transition-all duration-300 outline-none active:scale-95;
 }

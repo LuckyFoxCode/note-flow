@@ -14,14 +14,22 @@ const { compact } = defineProps<{ compact: boolean }>();
         <router-link
           v-slot="{ isExactActive }"
           :to="{ name: item.name }"
-          class="flex items-center gap-x-1 rounded-lg border border-transparent px-1.5 py-2 transition-colors outline-none focus-within:border-blue-500 hover:bg-slate-600 hover:text-white"
-          active-class="bg-active-nav text-white"
+          class="group focus-within:border-accent hover:bg-surface text-text-secondary flex items-center gap-x-2 rounded-lg border-2 border-transparent px-1.5 py-2 transition-colors duration-200 outline-none"
+          active-class="bg-surface"
         >
           <component
             :is="item.icon"
-            :class="['size-6', isExactActive ? 'text-lime-300' : '']"
+            :class="[
+              'size-6 transition-colors duration-200',
+              isExactActive ? 'text-accent-lime' : 'group-hover:text-accent-lime',
+            ]"
           />
-          <span v-if="compact">{{ item.name }}</span>
+          <span
+            v-if="compact"
+            :class="[isExactActive ? 'text-text-main font-medium' : 'font-normal']"
+            class="text-sm font-medium transition-all"
+            >{{ item.name }}</span
+          >
         </router-link>
       </li>
     </ul>
