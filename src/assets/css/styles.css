@@ -33,7 +33,7 @@
   --font-rubik: 'Rubik', sans-serif;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-text: var(--text-main);
+  --color-text-main: var(--text-main);
   --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
   --color-accent-lime: var(--accent-lime);
@@ -48,5 +48,5 @@ body {
 }
 
 .sidebar-btn {
-  @apply text-text-secondary hover:bg-surface hover:text-accent-lime flex w-full cursor-pointer justify-center rounded-lg border-2 border-transparent py-2 transition-all duration-300 outline-none active:scale-95;
+  @apply text-text-secondary hover:bg-surface hover:text-accent-lime flex w-full cursor-pointer justify-center rounded-lg border-2 border-transparent py-1.5 transition-all duration-300 outline-none active:scale-95;
 }

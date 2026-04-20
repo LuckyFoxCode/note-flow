@@ -1,4 +1,5 @@
 export { default as IconBurger } from './IconBurger.vue';
+export { default as IconClosed } from './IconClosed.vue';
 export { default as IconFox } from './IconFox.vue';
 export { default as IconHome } from './IconHome.vue';
 export { default as IconMoon } from './IconMoon.vue';

@@ -21,7 +21,7 @@ const { toggle, theme } = useTheme();
   >
     <TheSidebarLogo :compact="isCollapsed" />
     <TheSidebarNav :compact="isCollapsed" />
-    <div class="border-border mt-auto flex w-full flex-col gap-y-2 border-t pt-2">
+    <div class="border-border mt-auto flex w-full flex-col gap-y-1 border-t pt-2">
       <button
         class="sidebar-btn"
         @click="emit('toggleSidebar')"

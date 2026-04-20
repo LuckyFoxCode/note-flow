@@ -34,7 +34,12 @@ const openOverlay = () => {
   isOpenOverlay.value = true;
 };
 
+const closedOverlay = () => {
+  isOpenOverlay.value = false;
+};
+
 provide('openOverlay', openOverlay);
+provide('closedOverlay', closedOverlay);
 provide('state', state);
 
 onMounted(() => mobileMediaQuery.addEventListener('change', handleMediaChange));
