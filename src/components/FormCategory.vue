@@ -26,21 +26,24 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <div class="bg-bg-form flex w-100 flex-col rounded-lg border-2 px-2 py-3">
-    <h2 class="text-text text-xl">Form category</h2>
+  <div
+    class="bg-bg-form border-border mx-2 flex w-full flex-col rounded-lg border px-2 py-3 shadow-md md:mx-0 md:w-100"
+  >
+    <h2 class="text-text mb-3 text-xl">Form category</h2>
     <form
-      class="flex flex-col gap-y-1"
+      class="flex flex-col gap-y-2"
       @submit.prevent="onSubmit"
     >
       <input
         v-model.trim="categoryValue"
         type="text"
         placeholder="Add new category..."
-        class="border"
+        class="rounded-lg border border-slate-600 px-3 py-1.5 transition-colors duration-200 outline-none placeholder:text-slate-500 focus-within:border-blue-500"
       />
       <button
+        :disabled="categoryValue.length < 1"
         type="submit"
-        class="border"
+        class="hover:border-accent cursor-pointer rounded-lg border border-slate-600 px-3 py-1.5 transition-colors duration-200 outline-none placeholder:text-slate-500 focus-within:border-blue-500 disabled:cursor-not-allowed"
       >
         submit
       </button>
