@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import TheHeader from '@/components/TheHeader.vue';
+</script>
+
 <template>
-  <span>Home page</span>
+  <TheHeader>
+    <span>Home page</span>
+  </TheHeader>
 </template>
