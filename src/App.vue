@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, provide, ref } from 'vue';
+import { onMounted, provide, reactive, ref } from 'vue';
 import FormCategory from './components/FormCategory.vue';
 import TheOverlay from './components/TheOverlay.vue';
 import TheSidebar from './components/TheSidebar.vue';
@@ -14,7 +14,7 @@ const isMobile = ref(mobileMediaQuery.matches);
 const isCollapsed = ref(false);
 const isOpenOverlay = ref(false);
 
-const state = ref<State>({
+const state = reactive<State>({
   categories: [],
 });
 
@@ -25,9 +25,9 @@ const handleMediaChange = (event: MediaQueryListEvent) => {
 const toggleSidebar = () => (isCollapsed.value = !isCollapsed.value);
 
 const addCategory = (category: Category) => {
-  state.value.categories.push(category);
+  state.categories.push(category);
   isOpenOverlay.value = false;
-  console.log('STATE: ', state.value.categories);
+  console.log('STATE: ', state.categories);
 };
 
 const openOverlay = () => {

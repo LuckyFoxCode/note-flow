@@ -1,16 +1,28 @@
 <script setup lang="ts">
+import type { State } from '@/App.vue';
 import { IconArrowLeft } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
+import { computed, inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.slug as string;
+
+const state = inject<State>('state');
+const currentCategory = computed(() =>
+  state?.categories.find((category) => category.slug === slug),
+);
 </script>
 
 <template>
   <section>
-    <TheHeader>
+    <TheHeader
+      :style="{
+        borderColor: currentCategory?.categoryColor,
+        boxShadow: `0 8px 16px ${currentCategory?.categoryColor}4d`,
+      }"
+    >
       <div class="flex items-center gap-x-1">
         <button
           type="button"

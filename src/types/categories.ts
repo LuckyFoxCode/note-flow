@@ -3,6 +3,8 @@ export interface Category {
   name: string;
   slug: string;
   noteCount: number;
+  categoryColor: string;
+  categoryNotes: Note[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -14,6 +16,6 @@ export interface Note {
   categoryId: string;
   createdAt: Date;
   updatedAt: Date;
+  pinned: boolean;
   // tag: string[] = ???
-  // pinned: boolean = ???
 }

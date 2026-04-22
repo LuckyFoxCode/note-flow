@@ -1,24 +1,13 @@
 <script setup lang="ts">
+import { RADIO_COLORS } from '@/consts';
 import type { Category } from '@/types';
 import { slugify } from '@/utils';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import FormWrapper from './FormWrapper.vue';
 
 const categoryValue = ref('');
 const inputRef = ref<HTMLInputElement | null>(null);
 const selectedColor = ref('#3b82f6');
-const radioColors = ref([
-  '#3b82f6',
-  '#8b5cf6',
-  '#10b981',
-  '#f59e0b',
-  '#ef4444',
-  '#ec4899',
-  '#06b6d4',
-  '#6366f1',
-  '#84cc16',
-  '#f97316',
-]);
 
 const emit = defineEmits<{
   'add-category': [category: Category];
@@ -28,11 +17,15 @@ const onSubmit = () => {
   if (!categoryValue.value.trim() || categoryValue.value.length > 25) return;
 
   const slug = slugify(categoryValue.value);
+  const currentColor = computed(() => selectedColor.value);
+
   const newCategory: Category = {
     id: crypto.randomUUID(),
     name: categoryValue.value,
     slug,
     noteCount: 0,
+    categoryColor: currentColor.value,
+    categoryNotes: [],
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -62,7 +55,7 @@ onMounted(() => {
       />
       <div class="flex items-center justify-between">
         <label
-          v-for="color in radioColors"
+          v-for="color in RADIO_COLORS"
           :key="color"
           class="relative cursor-pointer"
         >
