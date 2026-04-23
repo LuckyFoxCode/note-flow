@@ -11,11 +11,13 @@ export interface Category {
 
 export interface Note {
   id: string;
+  tag: string[];
   title: string;
+  pinned: boolean;
   content: string;
+  completed: boolean;
   categoryId: string;
+  categoryColor: string;
   createdAt: Date;
   updatedAt: Date;
-  pinned: boolean;
-  // tag: string[] = ???
 }

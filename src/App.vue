@@ -3,6 +3,7 @@ import { onMounted, provide, reactive, ref } from 'vue';
 import FormCategory from './components/FormCategory.vue';
 import TheOverlay from './components/TheOverlay.vue';
 import TheSidebar from './components/TheSidebar.vue';
+import { MOCK_CATEGORIES } from './consts';
 import type { Category } from './types';
 
 export interface State {
@@ -15,7 +16,7 @@ const isCollapsed = ref(false);
 const isOpenOverlay = ref(false);
 
 const state = reactive<State>({
-  categories: [],
+  categories: MOCK_CATEGORIES,
 });
 
 const handleMediaChange = (event: MediaQueryListEvent) => {
@@ -27,7 +28,6 @@ const toggleSidebar = () => (isCollapsed.value = !isCollapsed.value);
 const addCategory = (category: Category) => {
   state.categories.push(category);
   isOpenOverlay.value = false;
-  console.log('STATE: ', state.categories);
 };
 
 const openOverlay = () => {
