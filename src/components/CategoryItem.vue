@@ -47,3 +47,9 @@ const formatDate = (date: Date) => {
     </router-link>
   </li>
 </template>
+
+<style scoped>
+.category-link:hover {
+  box-shadow: 0 5px 8px -3px var(--category-color);
+}
+</style>
