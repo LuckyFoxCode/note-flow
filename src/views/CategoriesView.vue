@@ -4,7 +4,7 @@ import { IconCircle } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
 import { inject, ref } from 'vue';
 
-const openOverlay = inject<() => void>('openOverlay');
+const openOverlay = inject<(type: 'category' | 'note') => void>('openOverlay');
 const state = inject<State>('state');
 
 const formatDate = (date: Date) => {
@@ -18,6 +18,12 @@ const formatDate = (date: Date) => {
   if (isToday) return 'Today';
 
   return new Intl.DateTimeFormat('en-US').format(date);
+};
+
+const handleOpenOverlay = () => {
+  if (openOverlay) {
+    openOverlay('category');
+  }
 };
 const percentageCount = ref(0);
 
@@ -34,7 +40,7 @@ const onClickCount = () => {
     <div>
       <button
         class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
-        @click="openOverlay"
+        @click="handleOpenOverlay"
       >
         add category
       </button>
