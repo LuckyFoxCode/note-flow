@@ -33,7 +33,7 @@ const onClickCount = () => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-1">
+  <section class="flex h-screen flex-col gap-1">
     <TheHeader>
       <span>Notes Page</span>
     </TheHeader>
@@ -53,7 +53,7 @@ const onClickCount = () => {
     </div>
     <ul
       v-if="state?.categories.length"
-      class="grid grid-cols-1 gap-1 px-1 md:grid-cols-2 md:gap-2 md:px-2 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 2xl:gap-4"
+      class="grid min-h-0 flex-1 grid-cols-1 content-start gap-1 overflow-y-auto p-1 md:grid-cols-2 md:gap-2 md:px-2 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 2xl:gap-4"
     >
       <li
         v-for="category in state?.categories"
@@ -72,7 +72,14 @@ const onClickCount = () => {
             />
           </div>
           <div class="text-text-secondary flex w-full justify-end text-xs md:text-sm 2xl:text-base">
-            <span>{{ formatDate(category.createdAt) }}</span>
+            <span
+              class="rounded-lg border-t px-2 py-1"
+              :style="{
+                borderColor: category.categoryColor,
+                boxShadow: `-2px -2px 8px -3px ${category.categoryColor}`,
+              }"
+              >{{ formatDate(category.createdAt) }}</span
+            >
           </div>
         </router-link>
       </li>
