@@ -41,6 +41,8 @@
   --color-code-bg: var(--code-bg);
   --color-success: var(--success);
   --color-error: var(--error);
+  --breakpoint-uw: 120rem;
+  --breakpoint-3xl: 130rem;
 }
 
 body {
