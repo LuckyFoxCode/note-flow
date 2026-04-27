@@ -77,7 +77,6 @@ onMounted(() => {
       class="flex w-full flex-col gap-y-2"
       @submit.prevent="onSubmit"
     >
-      {{ currentPriority }}
       <input
         ref="inputRef"
         v-model="noteData.title"
@@ -101,7 +100,7 @@ onMounted(() => {
       />
       <select
         v-model="selectedPriority"
-        class="border-border text-text-secondary appearance-none rounded-lg border-2 px-3 py-1.5 outline-none"
+        class="border-border text-text-secondary focus-within:border-accent appearance-none rounded-lg border-2 px-3 py-1.5 transition-colors outline-none"
       >
         <option
           v-for="opt in priorityOptions"

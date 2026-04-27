@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { IconCircle } from '@/assets/icons';
 import type { Category } from '@/types';
+import { computed } from 'vue';
 
-const { category, percentageCount } = defineProps<{
+const { category } = defineProps<{
   category: Category;
-  percentageCount: number;
 }>();
 
 const formatDate = (date: Date) => {
@@ -19,6 +19,15 @@ const formatDate = (date: Date) => {
 
   return new Intl.DateTimeFormat('en-US').format(date);
 };
+
+const progress = computed(() => {
+  const notes = category.categoryNotes;
+
+  if (!notes || notes.length === 0) return 0;
+  const completed = notes.filter((note) => note.completed).length;
+
+  return Math.round((completed / notes.length) * 100);
+});
 </script>
 <template>
   <li>
@@ -30,7 +39,7 @@ const formatDate = (date: Date) => {
       <div class="mb-10 flex w-full items-center justify-between">
         <h3 class="mr-5 text-sm md:text-base 2xl:text-lg">{{ category.name }}</h3>
         <IconCircle
-          :percentage="percentageCount"
+          :percentage="progress"
           :color="category.categoryColor"
         />
       </div>

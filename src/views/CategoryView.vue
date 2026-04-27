@@ -59,25 +59,24 @@ const getDayLabel = (dateStr: string) => {
     .toUpperCase();
 };
 
-// const getFullDate = (dateStr: string) => {
-//   return new Date(dateStr).toLocaleDateString('en-US', {
-//     day: 'numeric',
-//     month: '2-digit',
-//     year: 'numeric',
-//     weekday: 'long',
-//   });
-// };
+const getFullDate = (dateStr: string) => {
+  if (getDayLabel(dateStr) === 'Today' || getDayLabel(dateStr) === 'Yesterday') {
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  }
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    weekday: 'long',
+  });
+};
 
 const handleOpenOverlay = () => {
   if (openOverlay) {
     openOverlay('note');
   }
 };
-
-// const timelineGradient = computed(() => {
-//   const colors = RADIO_COLORS.join(', ');
-//   return `repeating-linear-gradient(to bottom, ${colors}, ${RADIO_COLORS[0]} 1440px)`;
-// });
 </script>
 
 <template>
@@ -105,30 +104,36 @@ const handleOpenOverlay = () => {
       add note
     </button>
     <div
-      class="bg-accent absolute top-24 bottom-2 left-2 z-10 w-1"
+      class="bg-accent absolute top-24 bottom-2 left-2 z-10 w-0.75"
       :style="{
-        background: `var(text-secondary)`,
-        // background: timelineGradient,
-        // boxShadow: `0 0 8px 10px ${currentCategory?.categoryColor}33`,
+        background: currentCategory?.categoryColor,
+        boxShadow: `0 0 8px 6px ${currentCategory?.categoryColor}33`,
       }"
     />
     <ul
-      class="relative flex min-h-0 w-full flex-1 flex-col content-start gap-5 overflow-y-auto bg-transparent py-2"
+      class="relative flex min-h-0 w-full flex-1 flex-col content-start gap-5 overflow-y-auto bg-transparent py-2 pr-2"
     >
       <li
         v-for="date in timelineData"
         :key="date.date"
-        class="relative flex flex-col pl-8"
+        class="relative flex flex-col pl-6 md:pl-8"
       >
-        <h3
-          class="text-lg"
-          :style="{ color: currentCategory?.categoryColor }"
-        >
-          {{ getDayLabel(date.date) }}
+        <h3 class="flex items-center gap-x-1">
+          <span
+            class="text-lg"
+            :style="{ color: currentCategory?.categoryColor }"
+            >{{ getDayLabel(date.date) }},</span
+          >
+          <span class="text-text-secondary text-sm">{{ getFullDate(date.date) }}</span>
         </h3>
         <div
-          class="absolute top-1 left-2.5 z-20 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
-        />
+          class="absolute top-3 left-2.5 z-20 flex size-3.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white"
+        >
+          <div
+            class="size-2 rounded-full"
+            :style="{ backgroundColor: currentCategory?.categoryColor }"
+          />
+        </div>
 
         <ul
           class="3xl:grid-cols-5 uw:grid-cols-4 grid w-full gap-2 py-2 md:grid-cols-2 xl:grid-cols-3"
@@ -144,7 +149,7 @@ const handleOpenOverlay = () => {
                 <IconArchive
                   :class="[
                     'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                    note.completed ? 'text-accent' : 'text-text-secondary/70',
+                    note.completed ? 'text-[#ff9500]' : 'text-text-secondary/70',
                   ]"
                 />
                 <IconChecked
