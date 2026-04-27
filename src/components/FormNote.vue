@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { State } from '@/App.vue';
-import type { Category, Note } from '@/types';
+import { PRIORITY_CONFIG } from '@/consts';
+import { Priority, type Category, type Note } from '@/types';
 import { computed, inject, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import FormWrapper from './FormWrapper.vue';
@@ -14,6 +15,15 @@ const state = inject<State>('state');
 
 const inputRef = ref<HTMLInputElement | null>(null);
 const noteData = reactive({ title: '', content: '', tag: '' });
+
+const selectedPriority = ref<Priority>(Priority.Easy);
+
+const priorityOptions = Object.entries(PRIORITY_CONFIG).map(([value, config]) => ({
+  value: value as Priority,
+  ...config,
+}));
+
+const currentPriority = computed(() => selectedPriority.value);
 
 const currentSlug = route.params.slug;
 
@@ -44,6 +54,7 @@ const onSubmit = () => {
     content: noteData.content,
     pinned: false,
     title: noteData.title,
+    priority: currentPriority.value,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -66,6 +77,7 @@ onMounted(() => {
       class="flex w-full flex-col gap-y-2"
       @submit.prevent="onSubmit"
     >
+      {{ currentPriority }}
       <input
         ref="inputRef"
         v-model="noteData.title"
@@ -87,6 +99,18 @@ onMounted(() => {
         placeholder="Tag..."
         class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
+      <select
+        v-model="selectedPriority"
+        class="border-border text-text-secondary appearance-none rounded-lg border-2 px-3 py-1.5 outline-none"
+      >
+        <option
+          v-for="opt in priorityOptions"
+          :key="opt.value"
+          :value="opt.value"
+        >
+          {{ opt.label }}
+        </option>
+      </select>
       <button
         :disabled="!isValidForm"
         type="submit"

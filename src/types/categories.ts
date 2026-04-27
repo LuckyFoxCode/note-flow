@@ -9,6 +9,12 @@ export interface Category {
   updatedAt: Date;
 }
 
+export enum Priority {
+  Easy = 'easy',
+  Medium = 'medium',
+  Hard = 'hard',
+}
+
 export interface Note {
   id: string;
   tag: string[];
@@ -18,6 +24,7 @@ export interface Note {
   completed: boolean;
   categoryId: string;
   categoryColor: string;
+  priority: Priority;
   createdAt: Date;
   updatedAt: Date;
 }

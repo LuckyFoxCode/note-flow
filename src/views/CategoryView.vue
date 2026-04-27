@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { State } from '@/App.vue';
-import { IconArrowLeft, IconPin } from '@/assets/icons';
+import { IconArchive, IconArrowLeft, IconChecked, IconPin } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
-import { RADIO_COLORS } from '@/consts';
+import { PRIORITY_CONFIG } from '@/consts';
 import { computed, inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -63,6 +63,7 @@ const getDayLabel = (dateStr: string) => {
 //   return new Date(dateStr).toLocaleDateString('en-US', {
 //     day: 'numeric',
 //     month: '2-digit',
+//     year: 'numeric',
 //     weekday: 'long',
 //   });
 // };
@@ -73,10 +74,10 @@ const handleOpenOverlay = () => {
   }
 };
 
-const timelineGradient = computed(() => {
-  const colors = RADIO_COLORS.join(', ');
-  return `repeating-linear-gradient(to bottom, ${colors}, ${RADIO_COLORS[0]} 1440px)`;
-});
+// const timelineGradient = computed(() => {
+//   const colors = RADIO_COLORS.join(', ');
+//   return `repeating-linear-gradient(to bottom, ${colors}, ${RADIO_COLORS[0]} 1440px)`;
+// });
 </script>
 
 <template>
@@ -106,8 +107,9 @@ const timelineGradient = computed(() => {
     <div
       class="bg-accent absolute top-24 bottom-2 left-2 z-10 w-1"
       :style="{
-        background: timelineGradient,
-        boxShadow: `0 0 10px ${currentCategory?.categoryColor}33`,
+        background: `var(text-secondary)`,
+        // background: timelineGradient,
+        // boxShadow: `0 0 8px 10px ${currentCategory?.categoryColor}33`,
       }"
     />
     <ul
@@ -134,32 +136,58 @@ const timelineGradient = computed(() => {
           <li
             v-for="note in date.notes"
             :key="note.id"
-            class="border-border flex flex-col rounded-lg border p-2"
+            class="border-border flex flex-col gap-y-5 rounded-lg border p-2"
           >
-            <div class="mb-7 flex items-center gap-x-1.5">
+            <div class="flex items-center gap-x-1.5">
               <h4 class="text-text-main flex-1">{{ note.title }}</h4>
-              <IconPin
-                :class="[
-                  'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                  note.pinned ? 'text-error' : 'text-border',
-                ]"
-              />
+              <div class="flex items-center gap-x-1">
+                <IconArchive
+                  :class="[
+                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
+                    note.completed ? 'text-accent' : 'text-text-secondary/70',
+                  ]"
+                />
+                <IconChecked
+                  :class="[
+                    'size-5 cursor-pointer transition-colors duration-200',
+                    note.completed ? 'text-accent-lime' : 'text-text-secondary/70',
+                  ]"
+                />
+                <IconPin
+                  :class="[
+                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
+                    note.pinned ? 'text-error' : 'text-text-secondary/30',
+                  ]"
+                />
+              </div>
             </div>
-            <div class="text-text-secondary mb-7 text-sm">{{ note.content }}</div>
-            <ul class="flex w-full items-center justify-end gap-x-1">
-              <li
-                v-for="tag in note.tag"
-                :key="tag"
-                class="rounded-lg border px-1.5 py-1 text-xs"
+            <div class="text-text-secondary flex-1 text-sm">{{ note.content }}</div>
+            <div class="flex flex-col items-end gap-y-2">
+              <div
+                class="w-fit rounded-lg border px-1.5 py-1 text-xs capitalize"
                 :style="{
-                  backgroundColor: `${note.categoryColor}20`,
-                  color: note.categoryColor,
-                  borderColor: note.categoryColor,
+                  color: PRIORITY_CONFIG[note.priority].color,
+                  borderColor: PRIORITY_CONFIG[note.priority].color,
+                  backgroundColor: `${PRIORITY_CONFIG[note.priority].color}20`,
                 }"
               >
-                {{ tag }}
-              </li>
-            </ul>
+                {{ note.priority }}
+              </div>
+              <ul class="flex w-full items-center justify-end gap-x-1">
+                <li
+                  v-for="tag in note.tag"
+                  :key="tag"
+                  class="rounded-lg border px-1.5 py-1 text-xs"
+                  :style="{
+                    backgroundColor: `${note.categoryColor}20`,
+                    color: note.categoryColor,
+                    borderColor: note.categoryColor,
+                  }"
+                >
+                  {{ tag }}
+                </li>
+              </ul>
+            </div>
           </li>
         </ul>
       </li>

@@ -1,4 +1,4 @@
-import type { Category } from '@/types';
+import { Priority, type Category } from '@/types';
 
 export const RADIO_COLORS = [
   '#3b82f6',
@@ -12,6 +12,12 @@ export const RADIO_COLORS = [
   '#84cc16',
   '#f97316',
 ] as const;
+
+export const PRIORITY_CONFIG = {
+  [Priority.Easy]: { label: 'Easy', color: '#00c7be' },
+  [Priority.Medium]: { label: 'Medium', color: '#ff9500' },
+  [Priority.Hard]: { label: 'Hard', color: '#ff453a' },
+} as const;
 
 export const MOCK_CATEGORIES: Category[] = [
   {
@@ -29,6 +35,7 @@ export const MOCK_CATEGORIES: Category[] = [
         content:
           'Deep dive into InjectionKey typing for robust dependency injection in TypeScript.',
         completed: false,
+        priority: Priority.Hard,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-25T10:00:00Z'),
@@ -41,6 +48,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Implement dynamic CSS variables to match category colors on the vertical line.',
         completed: true,
+        priority: Priority.Hard,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-25T08:30:00Z'),
@@ -53,6 +61,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Analyze bundle size and configure manual chunks for vendor dependencies.',
         completed: false,
+        priority: Priority.Hard,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-25T06:00:00Z'),
@@ -65,6 +74,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Clean up Pick and Omit usage across the data layer components.',
         completed: false,
+        priority: Priority.Medium,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-25T04:20:00Z'),
@@ -77,6 +87,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Create global DTOs for the notification and notes synchronization service.',
         completed: true,
+        priority: Priority.Hard,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-24T15:00:00Z'),
@@ -89,6 +100,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Move category form validation to a reusable useFormValidation composable.',
         completed: false,
+        priority: Priority.Easy,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-24T11:45:00Z'),
@@ -101,6 +113,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Sync icon variants with the latest Figma design tokens for dark mode.',
         completed: true,
+        priority: Priority.Medium,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-24T09:00:00Z'),
@@ -113,6 +126,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Setup pre-commit hooks for ESLint and Prettier to maintain code quality.',
         completed: true,
+        priority: Priority.Easy,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-22T14:10:00Z'),
@@ -125,6 +139,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Initialize Vitest for testing core business logic in composables.',
         completed: false,
+        priority: Priority.Hard,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-22T10:00:00Z'),
@@ -137,6 +152,7 @@ export const MOCK_CATEGORIES: Category[] = [
         pinned: false,
         content: 'Finalize the Pinia store hierarchy for categories and individual notes.',
         completed: true,
+        priority: Priority.Medium,
         categoryId: 'cat-001',
         categoryColor: '#3b82f6',
         createdAt: new Date('2026-04-20T13:00:00Z'),
@@ -156,6 +172,8 @@ export const MOCK_CATEGORIES: Category[] = [
     createdAt: new Date('2026-02-10T09:15:00Z'),
     updatedAt: new Date('2026-04-22T11:00:00Z'),
   },
+  // Остальные категории остаются без изменений в структуре,
+  // так как их массив заметок пуст
   {
     id: 'cat-003',
     name: 'Vue 3 Composition',
