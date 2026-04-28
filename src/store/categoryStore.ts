@@ -22,5 +22,15 @@ export const useCategoryStore = defineStore('categories', () => {
     });
   }
 
-  return { categories, addCategory, addNote };
+  function togglePinnedNote(categoryId: string, noteId: string) {
+    const category = categories.value.find((category) => category.id === categoryId);
+    if (!category) return;
+
+    const note = category.categoryNotes.find((note) => note.id === noteId);
+
+    if (!note) return;
+    note.pinned = !note.pinned;
+  }
+
+  return { categories, addCategory, addNote, togglePinnedNote };
 });

@@ -157,6 +157,7 @@ const getFullDate = (dateStr: string) => {
                     'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
                     note.pinned ? 'text-error' : 'text-text-secondary/30',
                   ]"
+                  @click="categoriesStore.togglePinnedNote(note.categoryId, note.id)"
                 />
               </div>
             </div>
