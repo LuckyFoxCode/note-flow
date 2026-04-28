@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { IconBurger, IconMoon, IconSun } from '@/assets/icons';
 import { useTheme } from '@/composables';
+import { useUiStore } from '@/store';
 import TheSidebarLogo from './TheSidebarLogo.vue';
 import TheSidebarNav from './TheSidebarNav.vue';
 
-const { isCollapsed } = defineProps<{ isCollapsed: boolean }>();
-
-const emit = defineEmits(['toggleSidebar']);
-
+const uiStore = useUiStore();
 const { toggle, theme } = useTheme();
 </script>
 
@@ -16,15 +14,15 @@ const { toggle, theme } = useTheme();
     :class="[
       'border-border bg-bg fixed top-0 left-0 z-50 flex h-full flex-col items-center gap-y-4 border-r transition-[width,transform] duration-200',
       'md:relative md:translate-x-0 md:pb-1',
-      isCollapsed ? 'w-40 lg:w-60' : 'w-10',
+      uiStore.isCollapsed ? 'w-40 lg:w-60' : 'w-10',
     ]"
   >
-    <TheSidebarLogo :compact="isCollapsed" />
-    <TheSidebarNav :compact="isCollapsed" />
+    <TheSidebarLogo :compact="uiStore.isCollapsed" />
+    <TheSidebarNav :compact="uiStore.isCollapsed" />
     <div class="border-border mt-auto flex w-full flex-col gap-y-1 border-t pt-2">
       <button
         class="sidebar-btn"
-        @click="emit('toggleSidebar')"
+        @click="uiStore.toggleSidebar"
       >
         <IconBurger class="size-5 transition-transform duration-200 group-active:scale-90" />
       </button>

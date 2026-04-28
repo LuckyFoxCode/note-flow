@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { IconClosed } from '@/assets/icons';
-import { inject } from 'vue';
+import { useUiStore } from '@/store';
 
 defineProps<{ title: string }>();
-const closedOverlay = inject<() => void>('closedOverlay');
+
+const uiStore = useUiStore();
 </script>
 
 <template>
@@ -18,7 +19,7 @@ const closedOverlay = inject<() => void>('closedOverlay');
       <button
         type="button"
         class="group outline-none"
-        @click="closedOverlay"
+        @click="uiStore.closeOverlay"
       >
         <IconClosed
           class="hover:text-accent-lime group-focus-within:text-accent size-8 cursor-pointer transition-colors duration-200"

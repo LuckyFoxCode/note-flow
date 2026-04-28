@@ -1,6 +1,6 @@
 <template>
   <section
-    class="bg-surface/20 absolute top-0 left-0 z-99 flex h-full w-full items-center justify-center backdrop-blur-xs"
+    class="bg-surface/90 absolute top-0 left-0 z-99 flex h-full w-full items-center justify-center"
   >
     <slot></slot>
   </section>

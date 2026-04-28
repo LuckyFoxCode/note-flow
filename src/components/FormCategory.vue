@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { RADIO_COLORS } from '@/consts';
+import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { slugify } from '@/utils';
 import { computed, onMounted, ref } from 'vue';
 import FormWrapper from './FormWrapper.vue';
 
+const categoriesStore = useCategoryStore();
+const uiStore = useUiStore();
+
 const categoryValue = ref('');
 const inputRef = ref<HTMLInputElement | null>(null);
 const selectedColor = ref('#3b82f6');
-
-const emit = defineEmits<{
-  'add-category': [category: Category];
-}>();
 
 const onSubmit = () => {
   if (!categoryValue.value.trim() || categoryValue.value.length > 25) return;
@@ -30,8 +30,9 @@ const onSubmit = () => {
     updatedAt: new Date(),
   };
 
-  emit('add-category', newCategory);
+  categoriesStore.addCategory(newCategory);
   categoryValue.value = '';
+  uiStore.closeOverlay();
 };
 
 onMounted(() => {

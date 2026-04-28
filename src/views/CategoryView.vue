@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { State } from '@/App.vue';
 import { IconArchive, IconArrowLeft, IconChecked, IconPin } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
 import { PRIORITY_CONFIG } from '@/consts';
-import { computed, inject } from 'vue';
+import { useCategoryStore, useUiStore } from '@/store';
+import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
+const uiStore = useUiStore();
+const categoriesStore = useCategoryStore();
+
 const slug = route.params.slug as string;
 
-const openOverlay = inject<(type: 'category' | 'note') => void>('openOverlay');
-const state = inject<State>('state');
-
 const currentCategory = computed(() =>
-  state?.categories.find((category) => category.slug === slug),
+  categoriesStore.categories.find((category) => category.slug === slug),
 );
 
 const timelineData = computed(() => {
@@ -71,12 +71,6 @@ const getFullDate = (dateStr: string) => {
     weekday: 'long',
   });
 };
-
-const handleOpenOverlay = () => {
-  if (openOverlay) {
-    openOverlay('note');
-  }
-};
 </script>
 
 <template>
@@ -99,7 +93,7 @@ const handleOpenOverlay = () => {
     </TheHeader>
     <button
       class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
-      @click="handleOpenOverlay"
+      @click="uiStore.openOverlay('note')"
     >
       add note
     </button>

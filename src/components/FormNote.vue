@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import type { State } from '@/App.vue';
 import { PRIORITY_CONFIG } from '@/consts';
+import { useCategoryStore, useUiStore } from '@/store';
 import { Priority, type Category, type Note } from '@/types';
-import { computed, inject, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import FormWrapper from './FormWrapper.vue';
 
-const emit = defineEmits<{
-  'add-note': [categorySlug: string, note: Note];
-}>();
-
 const route = useRoute();
-const state = inject<State>('state');
+const categoriesStore = useCategoryStore();
+const uiStore = useUiStore();
 
 const inputRef = ref<HTMLInputElement | null>(null);
 const noteData = reactive({ title: '', content: '', tag: '' });
@@ -27,7 +24,7 @@ const currentPriority = computed(() => selectedPriority.value);
 
 const currentSlug = route.params.slug;
 
-const currentCategory: Category = state?.categories.find(
+const currentCategory: Category = categoriesStore.categories.find(
   (category) => category.slug === currentSlug,
 ) as Category;
 
@@ -59,11 +56,12 @@ const onSubmit = () => {
     updatedAt: new Date(),
   };
 
-  emit('add-note', currentSlug as string, newNote);
+  categoriesStore.addNote(currentSlug as string, newNote);
 
   noteData.title = '';
   noteData.content = '';
   noteData.tag = '';
+  uiStore.closeOverlay();
 };
 
 onMounted(() => {
