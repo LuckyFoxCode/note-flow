@@ -11,6 +11,22 @@
       content="width=device-width, initial-scale=1.0"
     />
     <title>Note Flow</title>
+    <script>
+      (function () {
+        try {
+          const uiData = localStorage.getItem('ui-store');
+          const theme = uiData ? JSON.parse(uiData).theme : 'dark';
+
+          document.documentElement.setAttribute('data-theme', theme);
+
+          const bgColor = theme === 'dark' ? '#0a0a0a' : '#ebebf0';
+          document.documentElement.style.backgroundColor = bgColor;
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.backgroundColor = '#0a0a0a';
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>

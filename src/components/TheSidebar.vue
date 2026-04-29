@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { IconBurger, IconMoon, IconSun } from '@/assets/icons';
-import { useTheme } from '@/composables';
 import { useUiStore } from '@/store';
 import TheSidebarLogo from './TheSidebarLogo.vue';
 import TheSidebarNav from './TheSidebarNav.vue';
 
 const uiStore = useUiStore();
-const { toggle, theme } = useTheme();
 </script>
 
 <template>
@@ -28,15 +26,15 @@ const { toggle, theme } = useTheme();
       </button>
       <button
         class="sidebar-btn flex w-full cursor-pointer justify-center py-1"
-        @click="toggle"
+        @click="uiStore.toggleTheme"
       >
         <transition
           name="fade-rotate"
           mode="out-in"
         >
           <component
-            :is="theme === 'dark' ? IconMoon : IconSun"
-            :key="theme"
+            :is="uiStore.theme === 'dark' ? IconMoon : IconSun"
+            :key="uiStore.theme"
             class="size-5"
           />
         </transition>

@@ -29,6 +29,14 @@
   --error: #ff453a;
 }
 
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+}
+
 @theme {
   --font-rubik: 'Rubik', sans-serif;
   --color-bg: var(--bg);
