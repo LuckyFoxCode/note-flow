@@ -143,21 +143,23 @@ const getFullDate = (dateStr: string) => {
                 <IconArchive
                   :class="[
                     'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                    note.completed ? 'text-[#ff9500]' : 'text-text-secondary/70',
+                    note.archived ? 'text-[#ff9500]' : 'text-text-secondary/70',
                   ]"
+                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'archived')"
                 />
                 <IconChecked
                   :class="[
                     'size-5 cursor-pointer transition-colors duration-200',
                     note.completed ? 'text-accent-lime' : 'text-text-secondary/70',
                   ]"
+                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'completed')"
                 />
                 <IconPin
                   :class="[
                     'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
                     note.pinned ? 'text-error' : 'text-text-secondary/30',
                   ]"
-                  @click="categoriesStore.togglePinnedNote(note.categoryId, note.id)"
+                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'pinned')"
                 />
               </div>
             </div>

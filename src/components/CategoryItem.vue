@@ -7,8 +7,9 @@ const { category } = defineProps<{
   category: Category;
 }>();
 
-const formatDate = (date: Date) => {
+const formatDate = (dateStr: string) => {
   const today = new Date();
+  const date = new Date(dateStr);
 
   const isToday =
     date.getDay() === today.getDay() &&

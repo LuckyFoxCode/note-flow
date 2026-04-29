@@ -3,7 +3,7 @@ import { RADIO_COLORS } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { slugify } from '@/utils';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import FormWrapper from './FormWrapper.vue';
 
 const categoriesStore = useCategoryStore();
@@ -17,17 +17,16 @@ const onSubmit = () => {
   if (!categoryValue.value.trim() || categoryValue.value.length > 25) return;
 
   const slug = slugify(categoryValue.value);
-  const currentColor = computed(() => selectedColor.value);
 
   const newCategory: Category = {
     id: crypto.randomUUID(),
     name: categoryValue.value,
     slug,
     noteCount: 0,
-    categoryColor: currentColor.value,
+    categoryColor: selectedColor.value,
     categoryNotes: [],
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   categoriesStore.addCategory(newCategory);

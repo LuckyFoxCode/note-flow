@@ -5,8 +5,8 @@ export interface Category {
   noteCount: number;
   categoryColor: string;
   categoryNotes: Note[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export enum Priority {
@@ -21,10 +21,11 @@ export interface Note {
   title: string;
   pinned: boolean;
   content: string;
+  archived: boolean;
   completed: boolean;
   categoryId: string;
   categoryColor: string;
   priority: Priority;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -50,10 +50,11 @@ const onSubmit = () => {
     completed: false,
     content: noteData.content,
     pinned: false,
+    archived: false,
     title: noteData.title,
     priority: currentPriority.value,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   categoriesStore.addNote(currentSlug as string, newNote);

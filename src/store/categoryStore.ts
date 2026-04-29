@@ -24,17 +24,25 @@ export const useCategoryStore = defineStore(
       });
     }
 
-    function togglePinnedNote(categoryId: string, noteId: string) {
+    type NoteToggleFields = 'pinned' | 'completed' | 'archived';
+
+    function findNote(categoryId: string, noteId: string): Note | undefined {
       const category = categories.value.find((category) => category.id === categoryId);
-      if (!category) return;
-
-      const note = category.categoryNotes.find((note) => note.id === noteId);
-
-      if (!note) return;
-      note.pinned = !note.pinned;
+      return category?.categoryNotes.find((note) => note.id === noteId);
     }
 
-    return { categories, addCategory, addNote, togglePinnedNote };
+    function toggleNoteField(categoryId: string, noteId: string, field: NoteToggleFields) {
+      const note = findNote(categoryId, noteId);
+
+      if (note) note[field] = !note[field];
+    }
+
+    return {
+      categories,
+      addCategory,
+      addNote,
+      toggleNoteField,
+    };
   },
   {
     persist: {
