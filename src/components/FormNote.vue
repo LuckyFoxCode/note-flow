@@ -36,6 +36,8 @@ const isValidForm = computed(() => {
   return hasTitle && hasContent && hasTags;
 });
 
+const isEditMode = computed(() => !!uiStore.editingNote);
+
 const fillForm = (note: Note | null) => {
   if (note) {
     noteData.title = note.title;
@@ -51,20 +53,6 @@ const fillForm = (note: Note | null) => {
 };
 
 const onSubmit = () => {
-  onMounted(() => {
-    inputRef.value?.focus();
-
-    if (uiStore.editingNote) {
-      const note = uiStore.editingNote;
-      noteData.title = note.title;
-      noteData.content = note.content;
-      noteData.tag = note.tag.join(', ');
-      selectedPriority.value = note.priority;
-    }
-  });
-
-  const isEditMode = computed(() => !!uiStore.editingNote);
-
   const tagsArray = noteData.tag
     .split(',')
     .map((t) => t.trim())
@@ -103,6 +91,10 @@ const onSubmit = () => {
 
   uiStore.closeOverlay();
 };
+
+onMounted(() => {
+  inputRef.value?.focus();
+});
 
 watch(
   () => uiStore.editingNote,
