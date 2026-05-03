@@ -24,6 +24,26 @@ export const useCategoryStore = defineStore(
       });
     }
 
+    function updateNote(categoryId: string, noteId: string, updateNote: Partial<Note>) {
+      categories.value = categories.value.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            categoryNotes: category.categoryNotes.map((note) => {
+              if (note.id === noteId) {
+                return {
+                  ...note,
+                  ...updateNote,
+                };
+              }
+              return note;
+            }),
+          };
+        }
+        return category;
+      });
+    }
+
     type NoteToggleFields = 'pinned' | 'completed' | 'archived';
 
     function findNote(categoryId: string, noteId: string): Note | undefined {
@@ -41,6 +61,7 @@ export const useCategoryStore = defineStore(
       categories,
       addCategory,
       addNote,
+      updateNote,
       toggleNoteField,
     };
   },

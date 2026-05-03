@@ -2,7 +2,7 @@
 import { PRIORITY_CONFIG } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
 import { Priority, type Category, type Note } from '@/types';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import FormWrapper from './FormWrapper.vue';
 
@@ -36,38 +36,83 @@ const isValidForm = computed(() => {
   return hasTitle && hasContent && hasTags;
 });
 
+const fillForm = (note: Note | null) => {
+  if (note) {
+    noteData.title = note.title;
+    noteData.content = note.content;
+    noteData.tag = note.tag.join(', ');
+    selectedPriority.value = note.priority;
+  } else {
+    noteData.title = '';
+    noteData.content = '';
+    noteData.tag = '';
+    selectedPriority.value = Priority.Easy;
+  }
+};
+
 const onSubmit = () => {
+  onMounted(() => {
+    inputRef.value?.focus();
+
+    if (uiStore.editingNote) {
+      const note = uiStore.editingNote;
+      noteData.title = note.title;
+      noteData.content = note.content;
+      noteData.tag = note.tag.join(', ');
+      selectedPriority.value = note.priority;
+    }
+  });
+
+  const isEditMode = computed(() => !!uiStore.editingNote);
+
   const tagsArray = noteData.tag
     .split(',')
     .map((t) => t.trim())
     .filter((t) => t !== '');
 
-  const newNote: Note = {
-    id: crypto.randomUUID(),
-    tag: tagsArray,
-    categoryId: currentCategory.id,
-    categoryColor: currentCategory.categoryColor,
-    completed: false,
-    content: noteData.content,
-    pinned: false,
-    archived: false,
-    title: noteData.title,
-    priority: currentPriority.value,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+  if (isEditMode.value && uiStore.editingNote) {
+    categoriesStore.updateNote(uiStore.editingNote.categoryId, uiStore.editingNote.id, {
+      title: noteData.title,
+      content: noteData.content,
+      tag: tagsArray,
+      priority: selectedPriority.value,
+      updatedAt: new Date().toISOString(),
+    });
+  } else {
+    const newNote: Note = {
+      id: crypto.randomUUID(),
+      tag: tagsArray,
+      categoryId: currentCategory.id,
+      categoryColor: currentCategory.categoryColor,
+      completed: false,
+      content: noteData.content,
+      pinned: false,
+      archived: false,
+      title: noteData.title,
+      priority: currentPriority.value,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
-  categoriesStore.addNote(currentSlug as string, newNote);
+    categoriesStore.addNote(currentSlug as string, newNote);
+  }
 
   noteData.title = '';
   noteData.content = '';
   noteData.tag = '';
+
   uiStore.closeOverlay();
 };
 
-onMounted(() => {
-  inputRef.value?.focus();
-});
+watch(
+  () => uiStore.editingNote,
+  (newNote) => {
+    fillForm(newNote);
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <template>

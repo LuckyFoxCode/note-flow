@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconArchive, IconArrowLeft, IconChecked, IconPin } from '@/assets/icons';
+import { IconArchive, IconArrowLeft, IconChecked, IconPen, IconPin } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
 import { PRIORITY_CONFIG } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
@@ -93,7 +93,7 @@ const getFullDate = (dateStr: string) => {
     </TheHeader>
     <button
       class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
-      @click="uiStore.openOverlay('note')"
+      @click="uiStore.openOverlay('note', null)"
     >
       add note
     </button>
@@ -140,6 +140,10 @@ const getFullDate = (dateStr: string) => {
             <div class="flex items-center gap-x-1.5">
               <h4 class="text-text-main flex-1">{{ note.title }}</h4>
               <div class="flex items-center gap-x-1">
+                <IconPen
+                  class="hover:text-accent-lime text-text-secondary/70 size-5 cursor-pointer transition-colors duration-200"
+                  @click="uiStore.openOverlay('note', note)"
+                />
                 <IconArchive
                   :class="[
                     'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
@@ -149,7 +153,7 @@ const getFullDate = (dateStr: string) => {
                 />
                 <IconChecked
                   :class="[
-                    'size-5 cursor-pointer transition-colors duration-200',
+                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
                     note.completed ? 'text-accent-lime' : 'text-text-secondary/70',
                   ]"
                   @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'completed')"

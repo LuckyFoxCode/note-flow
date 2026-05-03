@@ -1,3 +1,4 @@
+import type { Note } from '@/types';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 
@@ -8,6 +9,7 @@ export const useUiStore = defineStore(
     type ThemeType = 'light' | 'dark';
 
     const theme = ref<ThemeType>('dark');
+    const editingNote = ref<Note | null>(null);
 
     watch(
       theme,
@@ -28,13 +30,15 @@ export const useUiStore = defineStore(
       theme.value = theme.value === 'dark' ? 'light' : 'dark';
     }
 
-    function openOverlay(type: FormType) {
+    function openOverlay(type: FormType, note: Note | null = null) {
       isActiveForm.value = type;
+      editingNote.value = note;
       isOpenOverlay.value = true;
     }
 
     function closeOverlay() {
       isOpenOverlay.value = false;
+      editingNote.value = null;
     }
 
     function toggleSidebar() {
@@ -52,6 +56,7 @@ export const useUiStore = defineStore(
     return {
       theme,
       isMobile,
+      editingNote,
       isCollapsed,
       isActiveForm,
       isOpenOverlay,
