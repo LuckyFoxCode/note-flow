@@ -98,11 +98,8 @@ const getFullDate = (dateStr: string) => {
       add note
     </button>
     <div
-      class="bg-accent absolute top-24 bottom-2 left-2 z-10 w-0.75"
-      :style="{
-        background: currentCategory?.categoryColor,
-        boxShadow: `0 0 8px 6px ${currentCategory?.categoryColor}33`,
-      }"
+      class="absolute top-24 bottom-2 left-2 z-10 w-0.75"
+      :style="{ background: `${currentCategory?.categoryColor}20` }"
     />
     <ul
       class="relative flex min-h-0 w-full flex-1 flex-col content-start gap-5 overflow-y-auto bg-transparent py-2 pr-2"
@@ -114,17 +111,17 @@ const getFullDate = (dateStr: string) => {
       >
         <h3 class="flex items-center gap-x-1">
           <span
-            class="text-lg"
+            class="text-text-main text-lg opacity-80"
             :style="{ color: currentCategory?.categoryColor }"
             >{{ getDayLabel(date.date) }},</span
           >
           <span class="text-text-secondary text-sm">{{ getFullDate(date.date) }}</span>
         </h3>
         <div
-          class="absolute top-3 left-2.5 z-20 flex size-3.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white"
+          class="absolute top-3 left-2.5 z-20 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white"
         >
           <div
-            class="size-2 rounded-full"
+            class="size-2.5 rounded-full"
             :style="{ backgroundColor: currentCategory?.categoryColor }"
           />
         </div>
@@ -135,7 +132,7 @@ const getFullDate = (dateStr: string) => {
           <li
             v-for="note in date.notes"
             :key="note.id"
-            class="border-border flex flex-col gap-y-5 rounded-lg border p-2"
+            class="border-border bg-code-bg/30 flex flex-col gap-y-5 rounded-lg border p-2"
           >
             <div class="flex items-center gap-x-1.5">
               <h4 class="text-text-main flex-1">{{ note.title }}</h4>
@@ -170,7 +167,7 @@ const getFullDate = (dateStr: string) => {
             <div class="text-text-secondary flex-1 text-sm">{{ note.content }}</div>
             <div class="flex flex-col items-end gap-y-2">
               <div
-                class="w-fit rounded-lg border px-1.5 py-1 text-xs capitalize"
+                class="w-fit rounded-lg px-1.5 py-1 text-xs capitalize"
                 :style="{
                   color: PRIORITY_CONFIG[note.priority].color,
                   borderColor: PRIORITY_CONFIG[note.priority].color,
@@ -183,11 +180,10 @@ const getFullDate = (dateStr: string) => {
                 <li
                   v-for="tag in note.tag"
                   :key="tag"
-                  class="rounded-lg border px-1.5 py-1 text-xs"
+                  class="border-border rounded-lg border px-1.5 py-1 text-xs"
                   :style="{
-                    backgroundColor: `${note.categoryColor}20`,
-                    color: note.categoryColor,
-                    borderColor: note.categoryColor,
+                    color: `${note.categoryColor}80`,
+                    borderColor: `${note.categoryColor}33`,
                   }"
                 >
                   {{ tag }}
