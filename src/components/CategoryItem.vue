@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { IconCircle } from '@/assets/icons';
+import { IconCircle, IconClosed } from '@/assets/icons';
+import { useCategoryStore } from '@/store';
 import type { Category } from '@/types';
 import { computed } from 'vue';
 
 const { category } = defineProps<{
   category: Category;
 }>();
+
+const categoriesStore = useCategoryStore();
 
 const formatDate = (dateStr: string) => {
   const today = new Date();
@@ -34,9 +37,13 @@ const progress = computed(() => {
   <li>
     <router-link
       :to="`/categories/${category.slug}`"
-      class="focus-within:border-accent border-border shadow-border category-link flex w-full flex-col rounded-lg border-2 px-2 py-2 shadow transition-all duration-200 outline-none hover:-translate-y-1 hover:shadow-lg md:p-1"
+      class="group focus-within:border-accent border-border shadow-border category-link relative flex w-full flex-col rounded-lg border-2 px-2 py-2 shadow transition-all duration-200 outline-none hover:-translate-y-1 hover:shadow-lg md:p-1"
       :style="{ '--category-color': category.categoryColor }"
     >
+      <IconClosed
+        class="text-text-secondary hover:text-error absolute top-1 left-0.5 z-10 size-6 opacity-0 transition-all duration-200 group-hover:opacity-100"
+        @click.stop.prevent="categoriesStore.removeCategory(category.id)"
+      />
       <div class="mb-10 flex w-full items-center justify-between">
         <h3 class="mr-5 text-sm md:text-base 2xl:text-lg">{{ category.name }}</h3>
         <IconCircle

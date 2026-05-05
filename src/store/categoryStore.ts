@@ -12,6 +12,10 @@ export const useCategoryStore = defineStore(
       categories.value.push(category);
     }
 
+    function removeCategory(categoryId: string) {
+      return (categories.value = categories.value.filter((category) => category.id !== categoryId));
+    }
+
     function addNote(categorySlug: string, note: Note) {
       categories.value = categories.value.map((category) => {
         if (category.slug === categorySlug) {
@@ -61,6 +65,7 @@ export const useCategoryStore = defineStore(
       categories,
       addCategory,
       addNote,
+      removeCategory,
       updateNote,
       toggleNoteField,
     };
