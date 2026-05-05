@@ -3,6 +3,7 @@ import { IconArchive, IconArrowLeft, IconChecked, IconPen, IconPin } from '@/ass
 import TheHeader from '@/components/TheHeader.vue';
 import { PRIORITY_CONFIG } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
+import type { Note } from '@/types';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -70,6 +71,12 @@ const getFullDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleDateString('en-US', {
     weekday: 'long',
   });
+};
+
+const isEditedNote = (note: Note) => {
+  if (!note.updatedAt || !note.createdAt) return false;
+
+  return new Date(note.updatedAt).getTime() > new Date(note.createdAt).getTime();
 };
 </script>
 
@@ -176,19 +183,28 @@ const getFullDate = (dateStr: string) => {
               >
                 {{ note.priority }}
               </div>
-              <ul class="flex w-full items-center justify-end gap-x-1">
-                <li
-                  v-for="tag in note.tag"
-                  :key="tag"
-                  class="border-border rounded-lg border px-1.5 py-1 text-xs"
-                  :style="{
-                    color: `${note.categoryColor}80`,
-                    borderColor: `${note.categoryColor}33`,
-                  }"
+              <div class="flex w-full gap-x-1">
+                <span
+                  v-if="isEditedNote(note)"
+                  class="text-text-secondary/30 flex w-fit items-center text-xs"
                 >
-                  {{ tag }}
-                </li>
-              </ul>
+                  <IconPen class="mr-0.5 size-3" />
+                  {{ getDayLabel(note.updatedAt) }}
+                </span>
+                <ul class="flex w-full items-center justify-end gap-x-1">
+                  <li
+                    v-for="tag in note.tag"
+                    :key="tag"
+                    class="border-border rounded-lg border px-1.5 py-1 text-xs"
+                    :style="{
+                      color: `${note.categoryColor}80`,
+                      borderColor: `${note.categoryColor}33`,
+                    }"
+                  >
+                    {{ tag }}
+                  </li>
+                </ul>
+              </div>
             </div>
           </li>
         </ul>
