@@ -4,6 +4,7 @@ import { useCategoryStore, useUiStore } from '@/store';
 import { Priority, type Category, type Note } from '@/types';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
@@ -144,13 +145,11 @@ watch(
           {{ opt.label }}
         </option>
       </select>
-      <button
-        :disabled="!isValidForm"
+      <BaseButton
+        title="submit"
         type="submit"
-        class="hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 text-lg capitalize transition-colors duration-200 outline-none disabled:cursor-not-allowed"
-      >
-        submit
-      </button>
+        :disabled="!isValidForm"
+      />
     </form>
   </FormWrapper>
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseButton from '@/components/BaseButton.vue';
 import CategoryItem from '@/components/CategoryItem.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import { useCategoryStore, useUiStore } from '@/store';
@@ -13,12 +14,11 @@ const uiStore = useUiStore();
       <span>Categories Page</span>
     </TheHeader>
     <div>
-      <button
-        class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
+      <BaseButton
+        title="add category"
+        type="button"
         @click="uiStore.openOverlay('category')"
-      >
-        add category
-      </button>
+      />
     </div>
     <ul
       v-if="categoriesStore.categories.length"

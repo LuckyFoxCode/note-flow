@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import BaseButton from '@/components/BaseButton.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import { router } from '@/routers';
+
 function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
@@ -13,11 +15,11 @@ function logout() {
     <TheHeader>
       <span>Home page</span>
     </TheHeader>
-    <button
-      class="bg-surface text-text-main border-border hover:border-accent-lime w-full cursor-pointer rounded-lg border-2 p-2 transition-colors duration-200 md:w-fit"
+    <BaseButton
+      title="LogOut"
+      type="button"
+      class="w-full md:w-fit"
       @click="logout"
-    >
-      LogOut
-    </button>
+    />
   </section>
 </template>

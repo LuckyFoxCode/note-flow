@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { router } from '@/routers';
 import { onMounted, ref } from 'vue';
+import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
@@ -45,12 +46,10 @@ onMounted(() => {
         minlength="4"
         placeholder="Password"
       />
-      <button
+      <BaseButton
+        title="submit"
         type="submit"
-        class="hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 text-lg capitalize transition-colors duration-200 outline-none disabled:cursor-not-allowed"
-      >
-        submit
-      </button>
+      />
     </form>
   </FormWrapper>
 </template>

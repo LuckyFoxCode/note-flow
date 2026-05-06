@@ -4,6 +4,7 @@ import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { slugify } from '@/utils';
 import { onMounted, ref } from 'vue';
+import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
@@ -79,13 +80,11 @@ onMounted(() => {
           </div>
         </label>
       </div>
-      <button
-        :disabled="categoryValue.length < 1"
+      <BaseButton
+        title="submit"
         type="submit"
-        class="hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 text-lg capitalize transition-colors duration-200 outline-none disabled:cursor-not-allowed"
-      >
-        submit
-      </button>
+        :disabled="categoryValue.length < 1"
+      />
     </form>
   </FormWrapper>
 </template>
