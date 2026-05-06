@@ -4,6 +4,7 @@ import { useCategoryStore, useUiStore } from '@/store';
 import { Priority, type Category, type Note } from '@/types';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
 const route = useRoute();
@@ -113,26 +114,23 @@ watch(
       class="flex w-full flex-col gap-y-2"
       @submit.prevent="onSubmit"
     >
-      <input
+      <BaseInput
         ref="inputRef"
         v-model="noteData.title"
         type="text"
         maxlength="25"
         placeholder="New note..."
-        class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
-      <input
+      <BaseInput
         v-model="noteData.content"
         type="text"
         maxlength="75"
         placeholder="Description..."
-        class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
-      <input
+      <BaseInput
         v-model="noteData.tag"
         type="text"
         placeholder="Tag..."
-        class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
       <select
         v-model="selectedPriority"

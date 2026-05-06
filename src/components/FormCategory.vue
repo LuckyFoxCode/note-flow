@@ -4,6 +4,7 @@ import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { slugify } from '@/utils';
 import { onMounted, ref } from 'vue';
+import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
 const categoriesStore = useCategoryStore();
@@ -45,13 +46,12 @@ onMounted(() => {
       class="flex flex-col gap-y-2"
       @submit.prevent="onSubmit"
     >
-      <input
+      <BaseInput
         ref="inputRef"
-        v-model.trim="categoryValue"
+        v-model="categoryValue"
         type="text"
         maxlength="25"
         placeholder="Add new category..."
-        class="border-border placeholder:text-text-secondary focus-within:border-accent rounded-lg border-2 px-3 py-1.5 text-lg transition-colors duration-200 outline-none"
       />
       <div class="flex items-center justify-between">
         <label
