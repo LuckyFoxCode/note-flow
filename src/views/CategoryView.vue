@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { IconArchive, IconArrowLeft, IconChecked, IconPen, IconPin } from '@/assets/icons';
+import { IconArrowLeft } from '@/assets/icons';
 import BaseButton from '@/components/BaseButton.vue';
+import { NoteTimeline } from '@/components/notes';
 import TheHeader from '@/components/TheHeader.vue';
-import { PRIORITY_CONFIG } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
-import type { Note } from '@/types';
+import type { Category } from '@/types';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -15,8 +15,8 @@ const categoriesStore = useCategoryStore();
 
 const slug = route.params.slug as string;
 
-const currentCategory = computed(() =>
-  categoriesStore.categories.find((category) => category.slug === slug),
+const currentCategory = computed(
+  () => categoriesStore.categories.find((category) => category.slug === slug) as Category,
 );
 
 const timelineData = computed(() => {
@@ -35,50 +35,15 @@ const timelineData = computed(() => {
     groups[dateKey].push(note);
   });
 
-  return Object.keys(groups)
-    .map((date) => ({
+  return Object.entries(groups)
+    .map(([date, groupNotes]) => ({
       date,
-      notes: groups[date]?.sort(
+      notes: [...groupNotes].sort(
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       ),
     }))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
-
-const getDayLabel = (dateStr: string) => {
-  const today = new Date().toISOString().split('T')[0];
-  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-
-  if (dateStr === today) return 'Today';
-  if (dateStr === yesterday) return 'Yesterday';
-
-  return new Date(dateStr)
-    .toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: '2-digit',
-      year: 'numeric',
-    })
-    .toUpperCase();
-};
-
-const getFullDate = (dateStr: string) => {
-  if (getDayLabel(dateStr) === 'Today' || getDayLabel(dateStr) === 'Yesterday') {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: '2-digit',
-      year: 'numeric',
-    });
-  }
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    weekday: 'long',
-  });
-};
-
-const isEditedNote = (note: Note) => {
-  if (!note.updatedAt || !note.createdAt) return false;
-
-  return new Date(note.updatedAt).getTime() > new Date(note.createdAt).getTime();
-};
 </script>
 
 <template>
@@ -106,111 +71,9 @@ const isEditedNote = (note: Note) => {
       @click="uiStore.openOverlay('note', null)"
     />
 
-    <div
-      class="absolute top-24 bottom-2 left-2 z-10 w-0.75"
-      :style="{ background: `${currentCategory?.categoryColor}20` }"
+    <NoteTimeline
+      :current-category="currentCategory"
+      :timeline-data="timelineData"
     />
-    <ul
-      class="relative flex min-h-0 w-full flex-1 flex-col content-start gap-5 overflow-y-auto bg-transparent py-2 pr-2"
-    >
-      <li
-        v-for="date in timelineData"
-        :key="date.date"
-        class="relative flex flex-col pl-6 md:pl-8"
-      >
-        <h3 class="flex items-center gap-x-1">
-          <span
-            class="text-text-main text-lg opacity-80"
-            :style="{ color: currentCategory?.categoryColor }"
-            >{{ getDayLabel(date.date) }},</span
-          >
-          <span class="text-text-secondary text-sm">{{ getFullDate(date.date) }}</span>
-        </h3>
-        <div
-          class="absolute top-3 left-2.5 z-20 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white"
-        >
-          <div
-            class="size-2.5 rounded-full"
-            :style="{ backgroundColor: currentCategory?.categoryColor }"
-          />
-        </div>
-
-        <ul
-          class="3xl:grid-cols-5 uw:grid-cols-4 grid w-full gap-2 py-2 md:grid-cols-2 xl:grid-cols-3"
-        >
-          <li
-            v-for="note in date.notes"
-            :key="note.id"
-            class="border-border bg-code-bg/30 flex flex-col gap-y-5 rounded-lg border p-2"
-          >
-            <div class="flex items-center gap-x-1.5">
-              <h4 class="text-text-main flex-1">{{ note.title }}</h4>
-              <div class="flex items-center gap-x-1">
-                <IconPen
-                  class="hover:text-accent-lime text-text-secondary/70 size-5 cursor-pointer transition-colors duration-200"
-                  @click="uiStore.openOverlay('note', note)"
-                />
-                <IconArchive
-                  :class="[
-                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                    note.archived ? 'text-[#ff9500]' : 'text-text-secondary/70',
-                  ]"
-                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'archived')"
-                />
-                <IconChecked
-                  :class="[
-                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                    note.completed ? 'text-accent-lime' : 'text-text-secondary/70',
-                  ]"
-                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'completed')"
-                />
-                <IconPin
-                  :class="[
-                    'hover:text-accent-lime size-5 cursor-pointer transition-colors duration-200',
-                    note.pinned ? 'text-error' : 'text-text-secondary/30',
-                  ]"
-                  @click="categoriesStore.toggleNoteField(note.categoryId, note.id, 'pinned')"
-                />
-              </div>
-            </div>
-            <div class="text-text-secondary flex-1 text-sm">{{ note.content }}</div>
-            <div class="flex flex-col items-end gap-y-2">
-              <div
-                class="w-fit rounded-lg px-1.5 py-1 text-xs capitalize"
-                :style="{
-                  color: PRIORITY_CONFIG[note.priority].color,
-                  borderColor: PRIORITY_CONFIG[note.priority].color,
-                  backgroundColor: `${PRIORITY_CONFIG[note.priority].color}20`,
-                }"
-              >
-                {{ note.priority }}
-              </div>
-              <div class="flex w-full gap-x-1">
-                <span
-                  v-if="isEditedNote(note)"
-                  class="text-text-secondary/30 flex w-fit items-center text-xs"
-                >
-                  <IconPen class="mr-0.5 size-3" />
-                  {{ getDayLabel(note.updatedAt) }}
-                </span>
-                <ul class="flex w-full items-center justify-end gap-x-1">
-                  <li
-                    v-for="tag in note.tag"
-                    :key="tag"
-                    class="border-border rounded-lg border px-1.5 py-1 text-xs"
-                    :style="{
-                      color: `${note.categoryColor}80`,
-                      borderColor: `${note.categoryColor}33`,
-                    }"
-                  >
-                    {{ tag }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </section>
 </template>

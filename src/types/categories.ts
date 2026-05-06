@@ -17,7 +17,7 @@ export enum Priority {
 
 export interface Note {
   id: string;
-  tag: string[];
+  tags: string[];
   title: string;
   pinned: boolean;
   content: string;

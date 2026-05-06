@@ -29,7 +29,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n1-1',
-        tag: ['vue', 'composition-api'],
+        tags: ['vue', 'composition-api'],
         title: 'Mastering Provide/Inject',
         pinned: true,
         content: 'Deep dive into InjectionKey typing for robust dependency injection.',
@@ -43,7 +43,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-2',
-        tag: ['css', 'ui-design'],
+        tags: ['css', 'ui-design'],
         title: 'Timeline Component Styling',
         pinned: false,
         content: 'Implement dynamic CSS variables for category colors.',
@@ -57,7 +57,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-3',
-        tag: ['performance'],
+        tags: ['performance'],
         title: 'Vite Build Optimization',
         pinned: false,
         content: 'Analyze bundle size and configure manual chunks.',
@@ -71,7 +71,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-4',
-        tag: ['ts'],
+        tags: ['ts'],
         title: 'Refactor Utility Types',
         pinned: false,
         content: 'Clean up Pick and Omit usage across the data layer.',
@@ -85,7 +85,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-5',
-        tag: ['api'],
+        tags: ['api'],
         title: 'Define API Interfaces',
         pinned: false,
         content: 'Create global DTOs for synchronization service.',
@@ -99,7 +99,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-6',
-        tag: ['refactoring'],
+        tags: ['refactoring'],
         title: 'Extract Validation Logic',
         pinned: false,
         content: 'Move form validation to useFormValidation composable.',
@@ -113,7 +113,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-7',
-        tag: ['figma'],
+        tags: ['figma'],
         title: 'Design System Update',
         pinned: false,
         content: 'Sync icon variants with latest Figma design tokens.',
@@ -127,7 +127,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-8',
-        tag: ['git'],
+        tags: ['git'],
         title: 'Husky Hooks Config',
         pinned: false,
         content: 'Setup pre-commit hooks for ESLint and Prettier.',
@@ -141,7 +141,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-9',
-        tag: ['testing'],
+        tags: ['testing'],
         title: 'Unit Test Setup',
         pinned: false,
         content: 'Initialize Vitest for core business logic.',
@@ -155,7 +155,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n1-10',
-        tag: ['architecture'],
+        tags: ['architecture'],
         title: 'Pinia Store Structure',
         pinned: false,
         content: 'Finalize the Pinia store hierarchy for the app.',
@@ -180,7 +180,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n2-1',
-        tag: ['ts', 'generics'],
+        tags: ['ts', 'generics'],
         title: 'Generic Constraints',
         pinned: true,
         content: 'Understanding "extends" in generic types for better API responses.',
@@ -194,7 +194,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-2',
-        tag: ['ts', 'advanced'],
+        tags: ['ts', 'advanced'],
         title: 'Mapped Types',
         pinned: false,
         content: 'Create a Readonly variant of existing interfaces using Mapped Types.',
@@ -208,7 +208,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-3',
-        tag: ['ts'],
+        tags: ['ts'],
         title: 'Type Guards vs Assertions',
         pinned: false,
         content: 'Refactor "as" assertions to proper "is" type guards.',
@@ -222,7 +222,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-4',
-        tag: ['ts', 'oop'],
+        tags: ['ts', 'oop'],
         title: 'Abstract Classes',
         pinned: false,
         content: 'When to use abstract classes over interfaces for base services.',
@@ -236,7 +236,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-5',
-        tag: ['ts'],
+        tags: ['ts'],
         title: 'Template Literal Types',
         pinned: false,
         content: 'Generate dynamic event names like "onUpdate" using template literals.',
@@ -250,7 +250,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-6',
-        tag: ['ts', 'config'],
+        tags: ['ts', 'config'],
         title: 'tsconfig Strict Mode',
         pinned: false,
         content: 'Resolve all "implicit any" errors after enabling strict: true.',
@@ -264,7 +264,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-7',
-        tag: ['ts'],
+        tags: ['ts'],
         title: 'Utility Types: Required',
         pinned: false,
         content: 'Use Required<T> for form submission validation logic.',
@@ -278,7 +278,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-8',
-        tag: ['ts', 'patterns'],
+        tags: ['ts', 'patterns'],
         title: 'Discriminated Unions',
         pinned: false,
         content: 'Handle API error vs success states with discriminated unions.',
@@ -292,7 +292,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-9',
-        tag: ['ts'],
+        tags: ['ts'],
         title: 'Declaration Merging',
         pinned: false,
         content: 'Extend Window interface for third-party analytics scripts.',
@@ -306,7 +306,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n2-10',
-        tag: ['ts', 'learning'],
+        tags: ['ts', 'learning'],
         title: 'Covariance vs Contravariance',
         pinned: false,
         content: 'Deep dive into function type compatibility in TS.',
@@ -331,7 +331,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n3-1',
-        tag: ['vue', 'reactive'],
+        tags: ['vue', 'reactive'],
         title: 'ref vs reactive',
         pinned: true,
         content: 'Documenting when to use reactive() for complex objects.',
@@ -345,7 +345,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-2',
-        tag: ['vue', 'composables'],
+        tags: ['vue', 'composables'],
         title: 'Custom Mouse Tracker',
         pinned: false,
         content: 'Build a reusable useMouse composable with cleanup logic.',
@@ -359,7 +359,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-3',
-        tag: ['vue', 'lifecycle'],
+        tags: ['vue', 'lifecycle'],
         title: 'onWatcherCleanup',
         pinned: false,
         content: 'Using the new Vue 3.5 feature for efficient watcher cleanup.',
@@ -373,7 +373,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-4',
-        tag: ['vue', 'templates'],
+        tags: ['vue', 'templates'],
         title: 'DefineModel Usage',
         pinned: false,
         content: 'Simplify two-way binding with the defineModel macro.',
@@ -387,7 +387,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-5',
-        tag: ['vue', 'logic'],
+        tags: ['vue', 'logic'],
         title: 'Composables Pattern',
         pinned: false,
         content: 'Strategy for nested composables and state sharing.',
@@ -401,7 +401,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-6',
-        tag: ['vue', 'performance'],
+        tags: ['vue', 'performance'],
         title: 'ShallowRef Optimization',
         pinned: false,
         content: 'Using shallowRef for large arrays to avoid deep reactivity.',
@@ -415,7 +415,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-7',
-        tag: ['vue', 'async'],
+        tags: ['vue', 'async'],
         title: 'Suspense Boundary',
         pinned: false,
         content: 'Experimental: implementing Suspense for async components.',
@@ -429,7 +429,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-8',
-        tag: ['vue', 'dom'],
+        tags: ['vue', 'dom'],
         title: 'Template Refs with TS',
         pinned: false,
         content: 'Properly typing HTML element refs in setup script.',
@@ -443,7 +443,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-9',
-        tag: ['vue', 'plugins'],
+        tags: ['vue', 'plugins'],
         title: 'App-level Globals',
         pinned: false,
         content: 'How to provide global constants via app.provide.',
@@ -457,7 +457,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n3-10',
-        tag: ['vue', 'styles'],
+        tags: ['vue', 'styles'],
         title: 'v-bind in CSS',
         pinned: false,
         content: 'Using reactive variables directly inside <style> blocks.',
@@ -482,7 +482,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n4-1',
-        tag: ['agile'],
+        tags: ['agile'],
         title: 'Sprint Planning',
         pinned: true,
         content: 'Define tasks for the next development cycle.',
@@ -496,7 +496,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-2',
-        tag: ['documentation'],
+        tags: ['documentation'],
         title: 'Update README',
         pinned: false,
         content: 'Add installation steps and environment variables guide.',
@@ -510,7 +510,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-3',
-        tag: ['client'],
+        tags: ['client'],
         title: 'Feedback Review',
         pinned: false,
         content: 'Analyze user feedback from the beta testing group.',
@@ -524,7 +524,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-4',
-        tag: ['legal'],
+        tags: ['legal'],
         title: 'Privacy Policy',
         pinned: false,
         content: 'Draft initial privacy policy for data storage.',
@@ -538,7 +538,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-5',
-        tag: ['tools'],
+        tags: ['tools'],
         title: 'Jira Cleanup',
         pinned: false,
         content: 'Close stale issues and update labels in backlog.',
@@ -552,7 +552,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-6',
-        tag: ['hiring'],
+        tags: ['hiring'],
         title: 'Intern Interview',
         pinned: false,
         content: 'Prepare technical questions for the junior dev interview.',
@@ -566,7 +566,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-7',
-        tag: ['meetings'],
+        tags: ['meetings'],
         title: 'Daily Standup',
         pinned: false,
         content: 'Discuss blockers for the dashboard redesign.',
@@ -580,7 +580,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-8',
-        tag: ['budget'],
+        tags: ['budget'],
         title: 'SaaS Subscriptions',
         pinned: false,
         content: 'Review and renew Vercel and GitHub Team plans.',
@@ -594,7 +594,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-9',
-        tag: ['roadmap'],
+        tags: ['roadmap'],
         title: 'Q3 Planning',
         pinned: false,
         content: 'Outline key features for the third quarter.',
@@ -608,7 +608,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n4-10',
-        tag: ['assets'],
+        tags: ['assets'],
         title: 'Domain Renewal',
         pinned: false,
         content: 'Ensure auto-renewal is active for the primary domain.',
@@ -633,7 +633,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n5-1',
-        tag: ['pinia', 'setup'],
+        tags: ['pinia', 'setup'],
         title: 'Option vs Setup Store',
         pinned: true,
         content: 'Comparative analysis of store definitions.',
@@ -647,7 +647,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-2',
-        tag: ['pinia', 'persistance'],
+        tags: ['pinia', 'persistance'],
         title: 'Local Storage Sync',
         pinned: false,
         content: 'Implement pinia-plugin-persistedstate for user settings.',
@@ -661,7 +661,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-3',
-        tag: ['pinia', 'actions'],
+        tags: ['pinia', 'actions'],
         title: 'Async Actions Pattern',
         pinned: false,
         content: 'Best practices for handling try/catch inside Pinia actions.',
@@ -675,7 +675,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-4',
-        tag: ['pinia', 'getters'],
+        tags: ['pinia', 'getters'],
         title: 'Dynamic Getters',
         pinned: false,
         content: 'How to pass arguments to getters for filtered results.',
@@ -689,7 +689,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-5',
-        tag: ['pinia', 'testing'],
+        tags: ['pinia', 'testing'],
         title: 'Store Mocking',
         pinned: false,
         content: 'Setup createTestingPinia for component unit tests.',
@@ -703,7 +703,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-6',
-        tag: ['pinia', 'modular'],
+        tags: ['pinia', 'modular'],
         title: 'Splitting Large Stores',
         pinned: false,
         content: 'Guidelines for store decomposition and cross-store calls.',
@@ -717,7 +717,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-7',
-        tag: ['pinia', 'ssr'],
+        tags: ['pinia', 'ssr'],
         title: 'Hydration Strategy',
         pinned: false,
         content: 'Managing store hydration in Nuxt 3 environments.',
@@ -731,7 +731,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-8',
-        tag: ['pinia', 'reactivity'],
+        tags: ['pinia', 'reactivity'],
         title: 'StoreToRefs Gotchas',
         pinned: false,
         content: 'Why destructured store data loses reactivity.',
@@ -745,7 +745,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-9',
-        tag: ['pinia', 'api'],
+        tags: ['pinia', 'api'],
         title: '$reset and $patch',
         pinned: false,
         content: 'Bulk updates vs direct state mutations.',
@@ -759,7 +759,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n5-10',
-        tag: ['pinia', 'dev-tools'],
+        tags: ['pinia', 'dev-tools'],
         title: 'Customizing DevTools',
         pinned: false,
         content: 'Adding custom properties to the Pinia inspector.',
@@ -784,7 +784,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n6-1',
-        tag: ['a11y', 'html'],
+        tags: ['a11y', 'html'],
         title: 'Semantic Markup',
         pinned: true,
         content: 'Check all button elements for proper aria-labels.',
@@ -798,7 +798,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-2',
-        tag: ['a11y', 'focus'],
+        tags: ['a11y', 'focus'],
         title: 'Keyboard Navigation',
         pinned: false,
         content: 'Ensure all interactive elements are focusable.',
@@ -812,7 +812,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-3',
-        tag: ['a11y', 'colors'],
+        tags: ['a11y', 'colors'],
         title: 'Contrast Ratio',
         pinned: false,
         content: 'Verify WCAG AA compliance for the primary color palette.',
@@ -826,7 +826,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-4',
-        tag: ['a11y', 'images'],
+        tags: ['a11y', 'images'],
         title: 'Alt Text Audit',
         pinned: false,
         content: 'Missing alt tags on hero images in the blog section.',
@@ -840,7 +840,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-5',
-        tag: ['a11y', 'screen-readers'],
+        tags: ['a11y', 'screen-readers'],
         title: 'Aria Live Regions',
         pinned: false,
         content: 'Implement aria-live for notification toasts.',
@@ -854,7 +854,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-6',
-        tag: ['a11y', 'forms'],
+        tags: ['a11y', 'forms'],
         title: 'Label Associations',
         pinned: false,
         content: 'Fix explicit labels for the contact form inputs.',
@@ -868,7 +868,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-7',
-        tag: ['a11y', 'testing'],
+        tags: ['a11y', 'testing'],
         title: 'Lighthouse Check',
         pinned: false,
         content: 'Run automated accessibility tests on the landing page.',
@@ -882,7 +882,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-8',
-        tag: ['a11y', 'motion'],
+        tags: ['a11y', 'motion'],
         title: 'Reduced Motion',
         pinned: false,
         content: 'Support prefers-reduced-motion CSS media query.',
@@ -896,7 +896,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-9',
-        tag: ['a11y', 'navigation'],
+        tags: ['a11y', 'navigation'],
         title: 'Skip to Content Link',
         pinned: false,
         content: 'Add a skip link for keyboard users in the header.',
@@ -910,7 +910,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n6-10',
-        tag: ['a11y', 'tables'],
+        tags: ['a11y', 'tables'],
         title: 'Table Semantics',
         pinned: false,
         content: 'Verify scope="col" and captions for data tables.',
@@ -935,7 +935,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n7-1',
-        tag: ['ssr', 'nuxt'],
+        tags: ['ssr', 'nuxt'],
         title: 'Universal Rendering',
         pinned: true,
         content: 'Configuring hybrid rendering in Nuxt 3.',
@@ -949,7 +949,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-2',
-        tag: ['ssr', 'seo'],
+        tags: ['ssr', 'seo'],
         title: 'Dynamic Meta Tags',
         pinned: false,
         content: 'Use useHead for dynamic title and description.',
@@ -963,7 +963,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-3',
-        tag: ['ssr', 'api'],
+        tags: ['ssr', 'api'],
         title: 'Fetch vs AsyncData',
         pinned: false,
         content: 'Key differences for server-side data fetching.',
@@ -977,7 +977,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-4',
-        tag: ['ssr', 'auth'],
+        tags: ['ssr', 'auth'],
         title: 'Cookie-based Auth',
         pinned: false,
         content: 'Handling JWT tokens on the server and client.',
@@ -991,7 +991,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-5',
-        tag: ['ssr', 'caching'],
+        tags: ['ssr', 'caching'],
         title: 'SWR Strategies',
         pinned: false,
         content: 'Implementing Stale-While-Revalidate headers.',
@@ -1005,7 +1005,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-6',
-        tag: ['ssr', 'performance'],
+        tags: ['ssr', 'performance'],
         title: 'Critical CSS',
         pinned: false,
         content: 'Extracting and inlining critical styles.',
@@ -1019,7 +1019,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-7',
-        tag: ['ssr', 'errors'],
+        tags: ['ssr', 'errors'],
         title: 'SSR Error Handling',
         pinned: false,
         content: 'Custom 500 error pages for rendering failures.',
@@ -1033,7 +1033,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-8',
-        tag: ['ssr', 'client-only'],
+        tags: ['ssr', 'client-only'],
         title: 'ClientOnly Component',
         pinned: false,
         content: 'Wrapping non-SSR compatible libraries.',
@@ -1047,7 +1047,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-9',
-        tag: ['ssr', 'node'],
+        tags: ['ssr', 'node'],
         title: 'Server Middleware',
         pinned: false,
         content: 'Setting up custom H3 event handlers in Nuxt.',
@@ -1061,7 +1061,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n7-10',
-        tag: ['ssr', 'deployment'],
+        tags: ['ssr', 'deployment'],
         title: 'Nitro Deployment',
         pinned: false,
         content: 'Configuring Nitro for Vercel Edge Functions.',
@@ -1086,7 +1086,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n8-1',
-        tag: ['testing', 'setup'],
+        tags: ['testing', 'setup'],
         title: 'Vitest Config',
         pinned: true,
         content: 'Configure global setup and aliases for tests.',
@@ -1100,7 +1100,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-2',
-        tag: ['testing', 'vue'],
+        tags: ['testing', 'vue'],
         title: 'Component Mounts',
         pinned: false,
         content: 'Differences between mount and shallowMount.',
@@ -1114,7 +1114,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-3',
-        tag: ['testing', 'mocks'],
+        tags: ['testing', 'mocks'],
         title: 'Mocking Axios',
         pinned: false,
         content: 'Using vi.mock to simulate API responses.',
@@ -1128,7 +1128,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-4',
-        tag: ['testing', 'coverage'],
+        tags: ['testing', 'coverage'],
         title: 'Coverage Reports',
         pinned: false,
         content: 'Enable V8 coverage tool and set thresholds.',
@@ -1142,7 +1142,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-5',
-        tag: ['testing', 'async'],
+        tags: ['testing', 'async'],
         title: 'Testing Async Logic',
         pinned: false,
         content: 'Using flushPromises and nextTick in Vue tests.',
@@ -1156,7 +1156,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-6',
-        tag: ['testing', 'events'],
+        tags: ['testing', 'events'],
         title: 'Emit Verification',
         pinned: false,
         content: 'Check if component emits correct events with data.',
@@ -1170,7 +1170,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-7',
-        tag: ['testing', 'snaphots'],
+        tags: ['testing', 'snaphots'],
         title: 'Snapshot Testing',
         pinned: false,
         content: 'When to use snapshots for UI components.',
@@ -1184,7 +1184,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-8',
-        tag: ['testing', 'hooks'],
+        tags: ['testing', 'hooks'],
         title: 'Composables Testing',
         pinned: false,
         content: 'Testing reactive logic in isolation.',
@@ -1198,7 +1198,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-9',
-        tag: ['testing', 'timers'],
+        tags: ['testing', 'timers'],
         title: 'vi.useFakeTimers',
         pinned: false,
         content: 'Handling setTimeout and debounce in unit tests.',
@@ -1212,7 +1212,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n8-10',
-        tag: ['testing', 'ci'],
+        tags: ['testing', 'ci'],
         title: 'GitHub Actions Test',
         pinned: false,
         content: 'Running Vitest in head-less mode on CI pipeline.',
@@ -1237,7 +1237,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n9-1',
-        tag: ['perf', 'images'],
+        tags: ['perf', 'images'],
         title: 'Lazy Loading Images',
         pinned: true,
         content: 'Implement native loading="lazy" for all gallery items.',
@@ -1251,7 +1251,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-2',
-        tag: ['perf', 'code-splitting'],
+        tags: ['perf', 'code-splitting'],
         title: 'Async Components',
         pinned: false,
         content: 'Lazy load heavy modal and chart components.',
@@ -1265,7 +1265,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-3',
-        tag: ['perf', 'fonts'],
+        tags: ['perf', 'fonts'],
         title: 'Font Optimization',
         pinned: false,
         content: 'Switch to woff2 and add font-display: swap.',
@@ -1279,7 +1279,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-4',
-        tag: ['perf', 'memo'],
+        tags: ['perf', 'memo'],
         title: 'React v-memo',
         pinned: false,
         content: 'Using v-memo to skip re-renders for static list parts.',
@@ -1293,7 +1293,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-5',
-        tag: ['perf', 'bundles'],
+        tags: ['perf', 'bundles'],
         title: 'Analyze Bundle',
         pinned: false,
         content: 'Use rollup-plugin-visualizer to find large dependencies.',
@@ -1307,7 +1307,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-6',
-        tag: ['perf', 'network'],
+        tags: ['perf', 'network'],
         title: 'Prefetching Assets',
         pinned: false,
         content: 'Add <link rel="prefetch"> for next-page resources.',
@@ -1321,7 +1321,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-7',
-        tag: ['perf', 'execution'],
+        tags: ['perf', 'execution'],
         title: 'Web Workers',
         pinned: false,
         content: 'Move heavy data processing to a background worker.',
@@ -1335,7 +1335,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-8',
-        tag: ['perf', 'css'],
+        tags: ['perf', 'css'],
         title: 'Purge Unused CSS',
         pinned: false,
         content: 'Review Tailwind config to remove unused class generation.',
@@ -1349,7 +1349,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-9',
-        tag: ['perf', 'vitals'],
+        tags: ['perf', 'vitals'],
         title: 'Core Web Vitals',
         pinned: false,
         content: 'Improving LCP score by preloading the hero image.',
@@ -1363,7 +1363,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n9-10',
-        tag: ['perf', 'cleanup'],
+        tags: ['perf', 'cleanup'],
         title: 'Memory Leaks',
         pinned: false,
         content: 'Audit EventListeners in unmounted components.',
@@ -1388,7 +1388,7 @@ export const MOCK_CATEGORIES: Category[] = [
     categoryNotes: [
       {
         id: 'n10-1',
-        tag: ['ci', 'gh-actions'],
+        tags: ['ci', 'gh-actions'],
         title: 'Build Workflow',
         pinned: true,
         content: 'Trigger production build on main branch push.',
@@ -1402,7 +1402,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-2',
-        tag: ['ci', 'lint'],
+        tags: ['ci', 'lint'],
         title: 'Lint Check',
         pinned: false,
         content: 'Run ESLint as a required check for PRs.',
@@ -1416,7 +1416,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-3',
-        tag: ['ci', 'deployment'],
+        tags: ['ci', 'deployment'],
         title: 'Vercel Integration',
         pinned: false,
         content: 'Setup preview deployments for each pull request.',
@@ -1430,7 +1430,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-4',
-        tag: ['ci', 'security'],
+        tags: ['ci', 'security'],
         title: 'Secrets Management',
         pinned: false,
         content: 'Migrate environment variables to GitHub Secrets.',
@@ -1444,7 +1444,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-5',
-        tag: ['ci', 'artifacts'],
+        tags: ['ci', 'artifacts'],
         title: 'Build Artifacts',
         pinned: false,
         content: 'Archive build dist folder for troubleshooting.',
@@ -1458,7 +1458,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-6',
-        tag: ['ci', 'notifications'],
+        tags: ['ci', 'notifications'],
         title: 'Slack Webhooks',
         pinned: false,
         content: 'Notify the team on failed CI pipeline runs.',
@@ -1472,7 +1472,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-7',
-        tag: ['ci', 'cache'],
+        tags: ['ci', 'cache'],
         title: 'PNPM Cache',
         pinned: false,
         content: 'Optimization: cache node_modules for faster builds.',
@@ -1486,7 +1486,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-8',
-        tag: ['ci', 'docker'],
+        tags: ['ci', 'docker'],
         title: 'Docker Build Check',
         pinned: false,
         content: 'Ensure Docker images build correctly on production tags.',
@@ -1500,7 +1500,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-9',
-        tag: ['ci', 'lighthouse'],
+        tags: ['ci', 'lighthouse'],
         title: 'Lighthouse CI',
         pinned: false,
         content: 'Automatically check performance budget on build.',
@@ -1514,7 +1514,7 @@ export const MOCK_CATEGORIES: Category[] = [
       },
       {
         id: 'n10-10',
-        tag: ['ci', 'versioning'],
+        tags: ['ci', 'versioning'],
         title: 'Auto Semantic Release',
         pinned: false,
         content: 'Setup automatic versioning based on commit messages.',

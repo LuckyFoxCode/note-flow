@@ -13,7 +13,7 @@ const categoriesStore = useCategoryStore();
 const uiStore = useUiStore();
 
 const inputRef = ref<HTMLInputElement | null>(null);
-const noteData = reactive({ title: '', content: '', tag: '' });
+const noteData = reactive({ title: '', content: '', tags: '' });
 
 const selectedPriority = ref<Priority>(Priority.Easy);
 
@@ -33,7 +33,7 @@ const currentCategory: Category = categoriesStore.categories.find(
 const isValidForm = computed(() => {
   const hasTitle = noteData.title.trim().length > 0;
   const hasContent = noteData.content.trim().length > 0;
-  const hasTags = noteData.tag.trim().length > 0;
+  const hasTags = noteData.tags.trim().length > 0;
 
   return hasTitle && hasContent && hasTags;
 });
@@ -44,18 +44,18 @@ const fillForm = (note: Note | null) => {
   if (note) {
     noteData.title = note.title;
     noteData.content = note.content;
-    noteData.tag = note.tag.join(', ');
+    noteData.tags = note.tags.join(', ');
     selectedPriority.value = note.priority;
   } else {
     noteData.title = '';
     noteData.content = '';
-    noteData.tag = '';
+    noteData.tags = '';
     selectedPriority.value = Priority.Easy;
   }
 };
 
 const onSubmit = () => {
-  const tagsArray = noteData.tag
+  const tagsArray = noteData.tags
     .split(',')
     .map((t) => t.trim())
     .filter((t) => t !== '');
@@ -64,14 +64,14 @@ const onSubmit = () => {
     categoriesStore.updateNote(uiStore.editingNote.categoryId, uiStore.editingNote.id, {
       title: noteData.title,
       content: noteData.content,
-      tag: tagsArray,
+      tags: tagsArray,
       priority: selectedPriority.value,
       updatedAt: new Date().toISOString(),
     });
   } else {
     const newNote: Note = {
       id: crypto.randomUUID(),
-      tag: tagsArray,
+      tags: tagsArray,
       categoryId: currentCategory.id,
       categoryColor: currentCategory.categoryColor,
       completed: false,
@@ -89,7 +89,7 @@ const onSubmit = () => {
 
   noteData.title = '';
   noteData.content = '';
-  noteData.tag = '';
+  noteData.tags = '';
 
   uiStore.closeOverlay();
 };
@@ -129,7 +129,7 @@ watch(
         placeholder="Description..."
       />
       <BaseInput
-        v-model="noteData.tag"
+        v-model="noteData.tags"
         type="text"
         placeholder="Tag..."
       />
