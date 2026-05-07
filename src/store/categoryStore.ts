@@ -1,12 +1,40 @@
-import { MOCK_CATEGORIES } from '@/consts';
+import { MOCK_CATEGORIES, type SortOption } from '@/consts';
 import type { Category, Note } from '@/types';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export const useCategoryStore = defineStore(
   'categories',
   () => {
     const categories = ref<Category[]>(MOCK_CATEGORIES);
+
+    const sortBy = ref<SortOption>('newest');
+    const sortedCategories = computed(() => {
+      const list = [...categories.value];
+
+      switch (sortBy.value) {
+        case 'newest':
+          return list.sort(
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+          );
+        case 'oldest':
+          return list.sort(
+            (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+          );
+        case 'percentage':
+          return list.sort((a, b) => {
+            const getProgress = (category: Category) => {
+              if (category.categoryNotes.length === 0) return 0;
+
+              const completed = category.categoryNotes.filter((note) => note.completed).length;
+              return (completed / category.categoryNotes.length) * 100;
+            };
+            return getProgress(b) - getProgress(a);
+          });
+        default:
+          return list;
+      }
+    });
 
     function addCategory(category: Category) {
       categories.value.push(category);
@@ -62,7 +90,9 @@ export const useCategoryStore = defineStore(
     }
 
     return {
+      sortBy,
       categories,
+      sortedCategories,
       addCategory,
       addNote,
       removeCategory,
@@ -73,7 +103,7 @@ export const useCategoryStore = defineStore(
   {
     persist: {
       key: 'category-store',
-      pick: ['categories'],
+      pick: ['categories', 'sortBy'],
     },
   },
 );

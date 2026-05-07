@@ -4,9 +4,11 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import CategoryList from '@/components/CategoryList.vue';
 import EntityActionBar from '@/components/EntityActionBar.vue';
 import TheHeader from '@/components/TheHeader.vue';
-import { useUiStore } from '@/store';
+import { SORT_OPTIONS } from '@/consts';
+import { useCategoryStore, useUiStore } from '@/store';
 
 const uiStore = useUiStore();
+const categoryStore = useCategoryStore();
 </script>
 
 <template>
@@ -20,22 +22,14 @@ const uiStore = useUiStore();
         type="button"
         @click="uiStore.openOverlay('category')"
       />
-      <BaseSelect>
+      <BaseSelect v-model="categoryStore.sortBy">
         <option
-          disabled
-          value="default"
+          v-for="option in SORT_OPTIONS"
+          :key="option.value"
+          :value="option.value"
         >
-          Filter
+          {{ option.label }}
         </option>
-
-        <option
-          value="Newest"
-          selected
-        >
-          Newest
-        </option>
-        <option value="Oldest">Oldest</option>
-        <option value="Percentage">Percentage</option>
       </BaseSelect>
     </EntityActionBar>
     <CategoryList />

@@ -19,6 +19,14 @@ export const PRIORITY_CONFIG = {
   [Priority.Hard]: { label: 'Hard', color: '#ff453a' },
 } as const;
 
+export const SORT_OPTIONS = [
+  { value: 'newest', label: 'Newest' },
+  { value: 'oldest', label: 'Oldest' },
+  { value: 'percentage', label: 'Percentage' },
+] as const;
+
+export type SortOption = (typeof SORT_OPTIONS)[number]['value'];
+
 export const MOCK_CATEGORIES: Category[] = [
   {
     id: 'cat-001',
