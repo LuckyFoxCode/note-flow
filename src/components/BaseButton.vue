@@ -18,7 +18,7 @@ const emit = defineEmits<{
     :type="type"
     :disabled="props.disabled"
     :class="[
-      'hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 text-lg capitalize transition-all duration-200 outline-none disabled:cursor-not-allowed',
+      'hover:border-accent-lime border-border text-text-secondary focus-within:border-accent cursor-pointer rounded-lg border-2 px-3 py-1.5 capitalize transition-all duration-200 outline-none disabled:cursor-not-allowed',
       props.class,
     ]"
     @click="emit('click', $event)"

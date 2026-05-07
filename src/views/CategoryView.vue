@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { IconArrowLeft } from '@/assets/icons';
 import BaseButton from '@/components/BaseButton.vue';
+import BaseSelect from '@/components/BaseSelect.vue';
+import EntityActionBar from '@/components/EntityActionBar.vue';
 import { NoteTimeline } from '@/components/notes';
 import TheHeader from '@/components/TheHeader.vue';
 import { useCategoryStore, useUiStore } from '@/store';
@@ -64,13 +66,47 @@ const timelineData = computed(() => {
         <h2 class="capitalize md:text-2xl">{{ slug }}</h2>
       </div>
     </TheHeader>
-    <BaseButton
-      title="add note"
-      type="button"
-      class="w-full md:w-fit"
-      @click="uiStore.openOverlay('note', null)"
-    />
+    <EntityActionBar>
+      <BaseButton
+        title="add note"
+        type="button"
+        class="w-full md:w-fit"
+        @click="uiStore.openOverlay('note', null)"
+      />
+      <BaseSelect>
+        <option
+          disabled
+          value="default"
+        >
+          Date
+        </option>
 
+        <option
+          value="Newest"
+          selected
+        >
+          Newest
+        </option>
+        <option value="Oldest">Oldest</option>
+      </BaseSelect>
+      <BaseSelect>
+        <option
+          disabled
+          value="default"
+        >
+          Priority
+        </option>
+        <option
+          value="All"
+          selected
+        >
+          All
+        </option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </BaseSelect>
+    </EntityActionBar>
     <NoteTimeline
       :current-category="currentCategory"
       :timeline-data="timelineData"

@@ -4,6 +4,7 @@ export { default as IconBurger } from './IconBurger.vue';
 export { default as IconChecked } from './IconChecked.vue';
 export { default as IconCircle } from './IconCircle.vue';
 export { default as IconClosed } from './IconClosed.vue';
+export { default as IconFilter } from './IconFilter.vue';
 export { default as IconFox } from './IconFox.vue';
 export { default as IconHome } from './IconHome.vue';
 export { default as IconMoon } from './IconMoon.vue';
