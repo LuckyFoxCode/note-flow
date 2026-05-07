@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { IconArrowLeft } from '@/assets/icons';
 import BaseButton from '@/components/BaseButton.vue';
+import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import EntityActionBar from '@/components/EntityActionBar.vue';
 import { NoteTimeline } from '@/components/notes';
@@ -106,6 +107,7 @@ const timelineData = computed(() => {
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>
       </BaseSelect>
+      <BaseCheckbox />
     </EntityActionBar>
     <NoteTimeline
       :current-category="currentCategory"
