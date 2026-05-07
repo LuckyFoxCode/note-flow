@@ -7,6 +7,7 @@ export { default as IconClosed } from './IconClosed.vue';
 export { default as IconFilter } from './IconFilter.vue';
 export { default as IconFox } from './IconFox.vue';
 export { default as IconHome } from './IconHome.vue';
+export { default as IconLogout } from './IconLogout.vue';
 export { default as IconMoon } from './IconMoon.vue';
 export { default as IconNotes } from './IconNotes.vue';
 export { default as IconPen } from './IconPen.vue';
