@@ -63,7 +63,9 @@ const getFullDate = (dateStr: string) => {
         />
       </div>
 
-      <ul
+      <TransitionGroup
+        name="list"
+        tag="ul"
         class="3xl:grid-cols-5 uw:grid-cols-4 grid w-full gap-2 py-2 md:grid-cols-2 xl:grid-cols-3"
       >
         <NoteCard
@@ -72,7 +74,20 @@ const getFullDate = (dateStr: string) => {
           :note="note"
           :get-day-label="getDayLabel"
         />
-      </ul>
+      </TransitionGroup>
     </li>
   </ul>
 </template>
+<style scoped>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>

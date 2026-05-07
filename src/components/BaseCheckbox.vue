@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useUiStore } from '@/store';
+
+const uiStore = useUiStore();
+</script>
+
 <template>
   <label
     for="pinned"
@@ -6,6 +12,7 @@
     <span class="mr-2 select-none">Pinned:</span>
     <input
       id="pinned"
+      v-model="uiStore.isPinned"
       name="pinned"
       type="checkbox"
       class="peer sr-only"

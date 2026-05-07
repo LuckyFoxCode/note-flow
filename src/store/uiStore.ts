@@ -25,6 +25,7 @@ export const useUiStore = defineStore(
     const isCollapsed = ref(false);
     const isOpenOverlay = ref(false);
     const isActiveForm = ref<FormType>('category');
+    const isPinned = ref(false);
 
     function toggleTheme() {
       theme.value = theme.value === 'dark' ? 'light' : 'dark';
@@ -52,10 +53,10 @@ export const useUiStore = defineStore(
     function initMediaWatcher() {
       mobileQuery.addEventListener('change', handleMediaChange);
     }
-
     return {
       theme,
       isMobile,
+      isPinned,
       editingNote,
       isCollapsed,
       isActiveForm,
@@ -70,7 +71,7 @@ export const useUiStore = defineStore(
   {
     persist: {
       key: 'ui-store',
-      pick: ['theme', 'isCollapsed'],
+      pick: ['theme', 'isCollapsed', 'isPinned'],
     },
   },
 );

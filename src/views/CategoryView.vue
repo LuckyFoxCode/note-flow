@@ -41,9 +41,15 @@ const timelineData = computed(() => {
   return Object.entries(groups)
     .map(([date, groupNotes]) => ({
       date,
-      notes: [...groupNotes].sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      ),
+      notes: [...groupNotes].sort((a, b) => {
+        if (uiStore.isPinned) {
+          const pinnedDiff = Number(b.pinned) - Number(a.pinned);
+
+          if (pinnedDiff !== 0) return pinnedDiff;
+        }
+
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      }),
     }))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
