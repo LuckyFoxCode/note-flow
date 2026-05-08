@@ -6,7 +6,7 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import EntityActionBar from '@/components/EntityActionBar.vue';
 import { NoteTimeline } from '@/components/notes';
 import TheHeader from '@/components/TheHeader.vue';
-import { SORT_NOTE_OPTIONS } from '@/consts';
+import { PRIORITY_FILTER_OPTIONS, SORT_NOTE_OPTIONS } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { computed } from 'vue';
@@ -24,14 +24,20 @@ const currentCategory = computed(
 );
 
 const timelineData = computed(() => {
-  if (!currentCategory.value?.categoryNotes) return [];
+  const allNotes = currentCategory.value.categoryNotes;
+  if (!allNotes) return [];
 
-  const notes = currentCategory.value.categoryNotes;
   const isNewest = categoriesStore.noteSort === 'newest';
+  const priorityFilter = categoriesStore.priorityFilter;
 
-  const groups: Record<string, typeof notes> = {};
+  const filteredNotes = allNotes.filter((note) => {
+    if (priorityFilter === 'all') return true;
+    return note.priority === priorityFilter;
+  });
 
-  notes.forEach((note) => {
+  const groups: Record<string, typeof allNotes> = {};
+
+  filteredNotes.forEach((note) => {
     const dateKey = new Date(note.createdAt).toISOString().split('T')[0] as string;
 
     if (!groups[dateKey]) {
@@ -100,22 +106,14 @@ const timelineData = computed(() => {
           {{ option.label }}
         </option>
       </BaseSelect>
-      <BaseSelect>
+      <BaseSelect v-model="categoriesStore.priorityFilter">
         <option
-          disabled
-          value="default"
+          v-for="option in PRIORITY_FILTER_OPTIONS"
+          :key="option.value"
+          :value="option.value"
         >
-          Priority
+          {{ option.label }}
         </option>
-        <option
-          value="All"
-          selected
-        >
-          All
-        </option>
-        <option value="Easy">Easy</option>
-        <option value="Medium">Medium</option>
-        <option value="Hard">Hard</option>
       </BaseSelect>
       <BaseCheckbox />
     </EntityActionBar>

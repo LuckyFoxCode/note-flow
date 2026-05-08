@@ -1,4 +1,4 @@
-import type { SORT_CATEGORY_OPTIONS, SORT_PRIORITY_OPTION } from '@/consts';
+import type { PRIORITY_FILTER_OPTIONS, SORT_CATEGORY_OPTIONS } from '@/consts';
 
 export interface Category {
   id: string;
@@ -36,4 +36,4 @@ type ExtractValue<T extends readonly { value: string }[]> = T[number]['value'];
 
 export type SortCategoryOption = ExtractValue<typeof SORT_CATEGORY_OPTIONS>;
 export type SortNoteOption = Exclude<ExtractValue<typeof SORT_CATEGORY_OPTIONS>, 'percentage'>;
-export type SortPriorityOption = ExtractValue<typeof SORT_PRIORITY_OPTION>;
+export type PriorityFilterOption = ExtractValue<typeof PRIORITY_FILTER_OPTIONS>;

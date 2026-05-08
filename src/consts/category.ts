@@ -30,7 +30,7 @@ export const SORT_NOTE_OPTIONS = [
   { value: 'oldest', label: 'Oldest' },
 ] as const;
 
-export const SORT_PRIORITY_OPTION = [
+export const PRIORITY_FILTER_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'easy', label: 'Easy' },
   { value: 'medium', label: 'Medium' },
