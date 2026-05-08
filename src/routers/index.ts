@@ -9,9 +9,24 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
-    name: 'Auth',
     meta: { requiresGuest: true },
     component: () => import('@/views/AuthView.vue'),
+    children: [
+      {
+        path: '',
+        redirect: { name: 'SignUp' },
+      },
+      {
+        path: 'register',
+        name: 'SignUp',
+        component: () => import('@/components/SignUp.vue'),
+      },
+      {
+        path: 'login',
+        name: 'SignIn',
+        component: () => import('@/components/SignIn.vue'),
+      },
+    ],
   },
   {
     path: '/categories',
@@ -49,10 +64,11 @@ router.beforeEach(async (to, from, next) => {
   const isAuthenticated = !!localStorage.getItem('token');
 
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresGuest = to.matched.some((record) => record.meta.requiresGuest);
 
-  if (requiresAuth && !isAuthenticated && to.name !== 'Auth') {
+  if (requiresAuth && !isAuthenticated) {
     next({ name: 'Auth' });
-  } else if (to.name === 'Auth' && isAuthenticated) {
+  } else if (requiresGuest && isAuthenticated) {
     next({ name: 'Home' });
   } else {
     next();

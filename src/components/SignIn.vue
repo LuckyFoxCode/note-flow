@@ -24,10 +24,10 @@ onMounted(() => {
 
 <template>
   <FormWrapper
-    title="Sign Up"
-    description="Already have an account?"
-    link="Login"
-    :to="{ name: 'SignIn' }"
+    title="Sign In"
+    description="Don't have an account?"
+    link="Create"
+    :to="{ name: 'SignUp' }"
   >
     <form
       class="flex w-full flex-col gap-y-2"
@@ -35,12 +35,6 @@ onMounted(() => {
     >
       <BaseInput
         ref="inputRef"
-        v-model="form.username"
-        type="text"
-        maxlength="15"
-        placeholder="Username"
-      />
-      <BaseInput
         v-model="form.email"
         type="email"
         placeholder="Email"

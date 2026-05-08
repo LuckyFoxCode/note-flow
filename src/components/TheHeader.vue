@@ -5,7 +5,7 @@ import { router } from '@/routers';
 function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  router.push({ name: 'Auth' });
+  router.push({ name: 'SignUp' });
 }
 </script>
 
