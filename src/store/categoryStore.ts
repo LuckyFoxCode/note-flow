@@ -1,5 +1,5 @@
-import { MOCK_CATEGORIES, type SortOption } from '@/consts';
-import type { Category, Note } from '@/types';
+import { MOCK_CATEGORIES } from '@/consts';
+import type { Category, Note, SortCategoryOption, SortNoteOption } from '@/types';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
@@ -8,11 +8,13 @@ export const useCategoryStore = defineStore(
   () => {
     const categories = ref<Category[]>(MOCK_CATEGORIES);
 
-    const sortBy = ref<SortOption>('newest');
+    const categorySort = ref<SortCategoryOption>('newest');
+    const noteSort = ref<SortNoteOption>('newest');
+
     const sortedCategories = computed(() => {
       const list = [...categories.value];
 
-      switch (sortBy.value) {
+      switch (categorySort.value) {
         case 'newest':
           return list.sort(
             (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -90,7 +92,8 @@ export const useCategoryStore = defineStore(
     }
 
     return {
-      sortBy,
+      noteSort,
+      categorySort,
       categories,
       sortedCategories,
       addCategory,
@@ -103,7 +106,7 @@ export const useCategoryStore = defineStore(
   {
     persist: {
       key: 'category-store',
-      pick: ['categories', 'sortBy'],
+      pick: ['categories', 'categorySort', 'noteSort'],
     },
   },
 );

@@ -19,13 +19,23 @@ export const PRIORITY_CONFIG = {
   [Priority.Hard]: { label: 'Hard', color: '#ff453a' },
 } as const;
 
-export const SORT_OPTIONS = [
+export const SORT_CATEGORY_OPTIONS = [
   { value: 'newest', label: 'Newest' },
   { value: 'oldest', label: 'Oldest' },
   { value: 'percentage', label: 'Percentage' },
 ] as const;
 
-export type SortOption = (typeof SORT_OPTIONS)[number]['value'];
+export const SORT_NOTE_OPTIONS = [
+  { value: 'newest', label: 'Newest' },
+  { value: 'oldest', label: 'Oldest' },
+] as const;
+
+export const SORT_PRIORITY_OPTION = [
+  { value: 'all', label: 'All' },
+  { value: 'easy', label: 'Easy' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'hard', label: 'Hard' },
+] as const;
 
 export const MOCK_CATEGORIES: Category[] = [
   {

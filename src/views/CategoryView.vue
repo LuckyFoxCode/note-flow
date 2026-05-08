@@ -6,6 +6,7 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import EntityActionBar from '@/components/EntityActionBar.vue';
 import { NoteTimeline } from '@/components/notes';
 import TheHeader from '@/components/TheHeader.vue';
+import { SORT_NOTE_OPTIONS } from '@/consts';
 import { useCategoryStore, useUiStore } from '@/store';
 import type { Category } from '@/types';
 import { computed } from 'vue';
@@ -26,6 +27,8 @@ const timelineData = computed(() => {
   if (!currentCategory.value?.categoryNotes) return [];
 
   const notes = currentCategory.value.categoryNotes;
+  const isNewest = categoriesStore.noteSort === 'newest';
+
   const groups: Record<string, typeof notes> = {};
 
   notes.forEach((note) => {
@@ -48,10 +51,18 @@ const timelineData = computed(() => {
           if (pinnedDiff !== 0) return pinnedDiff;
         }
 
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        const timeA = new Date(a.createdAt).getTime();
+        const timeB = new Date(b.createdAt).getTime();
+
+        return isNewest ? timeB - timeA : timeA - timeB;
       }),
     }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      const timeA = new Date(a.date).getTime();
+      const timeB = new Date(b.date).getTime();
+
+      return isNewest ? timeB - timeA : timeA - timeB;
+    });
 });
 </script>
 
@@ -80,21 +91,14 @@ const timelineData = computed(() => {
         class="w-full md:w-fit"
         @click="uiStore.openOverlay('note', null)"
       />
-      <BaseSelect>
+      <BaseSelect v-model="categoriesStore.noteSort">
         <option
-          disabled
-          value="default"
+          v-for="option in SORT_NOTE_OPTIONS"
+          :key="option.value"
+          :value="option.value"
         >
-          Date
+          {{ option.label }}
         </option>
-
-        <option
-          value="Newest"
-          selected
-        >
-          Newest
-        </option>
-        <option value="Oldest">Oldest</option>
       </BaseSelect>
       <BaseSelect>
         <option

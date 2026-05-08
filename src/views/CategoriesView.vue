@@ -4,7 +4,8 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import CategoryList from '@/components/CategoryList.vue';
 import EntityActionBar from '@/components/EntityActionBar.vue';
 import TheHeader from '@/components/TheHeader.vue';
-import { SORT_OPTIONS } from '@/consts';
+import { SORT_CATEGORY_OPTIONS } from '@/consts';
+
 import { useCategoryStore, useUiStore } from '@/store';
 
 const uiStore = useUiStore();
@@ -22,9 +23,9 @@ const categoryStore = useCategoryStore();
         type="button"
         @click="uiStore.openOverlay('category')"
       />
-      <BaseSelect v-model="categoryStore.sortBy">
+      <BaseSelect v-model="categoryStore.categorySort">
         <option
-          v-for="option in SORT_OPTIONS"
+          v-for="option in SORT_CATEGORY_OPTIONS"
           :key="option.value"
           :value="option.value"
         >
