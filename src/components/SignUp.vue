@@ -1,21 +1,31 @@
 <script setup lang="ts">
 import { router } from '@/routers';
+import { useAuthStore, useUiStore } from '@/store';
+import type { SignUpData, User } from '@/types';
 import { onMounted, ref } from 'vue';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
-const form = ref({ username: '', email: '', password: '' });
+const authStore = useAuthStore();
+const uiStore = useUiStore();
+const form = ref<SignUpData>({ username: '', email: '', password: '' });
 const inputRef = ref<HTMLInputElement | null>(null);
 
 const onSubmit = () => {
-  const userData = { ...form.value };
-  localStorage.setItem('user', JSON.stringify(userData));
+  const newUser: User = {
+    ...form.value,
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+  };
+  const result = authStore.register(newUser);
 
-  const fakeToken = btoa(form.value.email + Date.now());
-  localStorage.setItem('token', fakeToken);
-
-  router.push({ name: 'Home' });
+  if (result.success) {
+    uiStore.showToast('Registration successful! Please login.', 'success');
+    router.push({ name: 'SignIn' });
+  } else {
+    uiStore.showToast(result.message as string, 'error');
+  }
 };
 onMounted(() => {
   inputRef.value?.focus();

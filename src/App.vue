@@ -5,6 +5,7 @@ import FormCategory from './components/FormCategory.vue';
 import FormNote from './components/FormNote.vue';
 import TheOverlay from './components/TheOverlay.vue';
 import TheSidebar from './components/TheSidebar.vue';
+import TheToast from './components/TheToast.vue';
 import { useUiStore } from './store';
 
 const uiStore = useUiStore();
@@ -35,6 +36,7 @@ onMounted(() => uiStore.initMediaWatcher);
       <FormCategory v-if="uiStore.isActiveForm === 'category'" />
       <FormNote v-else />
     </TheOverlay>
+    <TheToast />
   </div>
 </template>
 <style scoped>

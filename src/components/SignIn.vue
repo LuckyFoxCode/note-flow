@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import { router } from '@/routers';
+import { useAuthStore, useUiStore } from '@/store';
+import type { SignInData } from '@/types';
 import { onMounted, ref } from 'vue';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import FormWrapper from './FormWrapper.vue';
 
-const form = ref({ username: '', email: '', password: '' });
+const authStore = useAuthStore();
+const uiStore = useUiStore();
+
+const form = ref<SignInData>({ email: '', password: '' });
 const inputRef = ref<HTMLInputElement | null>(null);
 
 const onSubmit = () => {
   const userData = { ...form.value };
-  localStorage.setItem('user', JSON.stringify(userData));
 
-  const fakeToken = btoa(form.value.email + Date.now());
-  localStorage.setItem('token', fakeToken);
+  const success = authStore.login(userData);
 
-  router.push({ name: 'Home' });
+  if (success) {
+    uiStore.showToast(`Welcome back`, 'success');
+    router.push({ name: 'Home' });
+  } else {
+    uiStore.showToast('Invalid email or password', 'error');
+  }
 };
 onMounted(() => {
   inputRef.value?.focus();

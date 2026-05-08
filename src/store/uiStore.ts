@@ -2,6 +2,8 @@ import type { Note } from '@/types';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 
+export type ToastType = 'success' | 'error' | 'warning';
+
 export const useUiStore = defineStore(
   'ui',
   () => {
@@ -26,6 +28,11 @@ export const useUiStore = defineStore(
     const isOpenOverlay = ref(false);
     const isActiveForm = ref<FormType>('category');
     const isPinned = ref(false);
+
+    const isToastVisible = ref(false);
+    const toastMessage = ref('');
+    const toastType = ref<ToastType>('success');
+    let timeoutId: number | null = null;
 
     function toggleTheme() {
       theme.value = theme.value === 'dark' ? 'light' : 'dark';
@@ -53,14 +60,31 @@ export const useUiStore = defineStore(
     function initMediaWatcher() {
       mobileQuery.addEventListener('change', handleMediaChange);
     }
+
+    function showToast(message: string, type: ToastType = 'success') {
+      if (timeoutId) clearTimeout(timeoutId);
+
+      toastMessage.value = message;
+      toastType.value = type;
+      isToastVisible.value = true;
+
+      timeoutId = window.setTimeout(() => {
+        isToastVisible.value = false;
+      }, 3000);
+    }
+
     return {
       theme,
       isMobile,
       isPinned,
+      toastType,
       editingNote,
       isCollapsed,
+      toastMessage,
       isActiveForm,
       isOpenOverlay,
+      isToastVisible,
+      showToast,
       openOverlay,
       toggleTheme,
       closeOverlay,
