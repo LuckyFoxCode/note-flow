@@ -10,7 +10,7 @@ function logout() {
   authStore.currentUser = null;
   localStorage.removeItem('token');
   uiStore.showToast('Logged out successfully. See you soon!', 'info');
-  router.push('/auth/login');
+  router.push({ name: 'SignIn' });
 }
 </script>
 

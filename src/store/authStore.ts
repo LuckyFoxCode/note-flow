@@ -31,10 +31,17 @@ export const useAuthStore = defineStore(
       return false;
     }
 
+    function remove(id: string) {
+      users.value = users.value.filter((user) => user.id !== id);
+      currentUser.value = null;
+      localStorage.removeItem('token');
+    }
+
     return {
       users,
       currentUser,
       login,
+      remove,
       register,
     };
   },
