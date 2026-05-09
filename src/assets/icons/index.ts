@@ -9,6 +9,7 @@ export { default as IconFire } from './IconFire.vue';
 export { default as IconFox } from './IconFox.vue';
 export { default as IconHome } from './IconHome.vue';
 export { default as IconInfo } from './IconInfo.vue';
+export { default as IconLogo } from './IconLogo.vue';
 export { default as IconLogout } from './IconLogout.vue';
 export { default as IconMoon } from './IconMoon.vue';
 export { default as IconNotes } from './IconNotes.vue';
