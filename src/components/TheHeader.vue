@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { IconLogout } from '@/assets/icons';
 import { router } from '@/routers';
+import { useAuthStore, useUiStore } from '@/store';
+
+const authStore = useAuthStore();
+const uiStore = useUiStore();
 
 function logout() {
+  authStore.currentUser = null;
   localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  router.push({ name: 'SignUp' });
+  uiStore.showToast('Logged out successfully. See you soon!', 'info');
+  router.push('/auth/login');
 }
 </script>
 

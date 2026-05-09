@@ -2,7 +2,7 @@ import type { Note } from '@/types';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 
-export type ToastType = 'success' | 'error' | 'warning';
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
 export const useUiStore = defineStore(
   'ui',
@@ -32,6 +32,7 @@ export const useUiStore = defineStore(
     const isToastVisible = ref(false);
     const toastMessage = ref('');
     const toastType = ref<ToastType>('success');
+    const toastDuration = ref(3000);
     let timeoutId: number | null = null;
 
     function toggleTheme() {
@@ -70,7 +71,7 @@ export const useUiStore = defineStore(
 
       timeoutId = window.setTimeout(() => {
         isToastVisible.value = false;
-      }, 3000);
+      }, toastDuration.value);
     }
 
     return {
@@ -83,6 +84,7 @@ export const useUiStore = defineStore(
       toastMessage,
       isActiveForm,
       isOpenOverlay,
+      toastDuration,
       isToastVisible,
       showToast,
       openOverlay,

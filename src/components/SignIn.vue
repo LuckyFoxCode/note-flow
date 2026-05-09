@@ -19,7 +19,7 @@ const onSubmit = () => {
   const success = authStore.login(userData);
 
   if (success) {
-    uiStore.showToast(`Welcome back`, 'success');
+    uiStore.showToast(`Great to see you again, ${authStore.currentUser?.username}!`, 'success');
     router.push({ name: 'Home' });
   } else {
     uiStore.showToast('Invalid email or password', 'error');
