@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { IconClosed } from '@/assets/icons';
 import { useUiStore } from '@/store';
-import type { RouteLocationRaw } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute, type RouteLocationRaw } from 'vue-router';
 
-defineProps<{ title: string; link: string; to: RouteLocationRaw; description: string }>();
+defineProps<{ title: string; link?: string; to?: RouteLocationRaw; description?: string }>();
 
+const route = useRoute();
 const uiStore = useUiStore();
+
+const isAuthPage = computed(() => {
+  if (route.path.includes('/auth')) return true;
+  return false;
+});
 </script>
 
 <template>
@@ -18,6 +25,7 @@ const uiStore = useUiStore();
       </div>
       <h2 class="flex flex-1 text-center text-2xl">{{ title }}</h2>
       <button
+        v-if="!isAuthPage"
         type="button"
         class="group outline-none"
         @click="uiStore.closeOverlay"
@@ -28,15 +36,18 @@ const uiStore = useUiStore();
       </button>
     </div>
     <slot />
-    <div class="bg-text-secondary/10 mx-auto mt-8 mb-4 h-0.5 w-5/6" />
-    <span class="text-text-main/30 text-center text-sm">
-      {{ description }}
-      <router-link
-        :to="to"
-        class="text-accent/70 hover:text-accent-lime focus:border-accent rounded-lg border-2 border-transparent p-1 text-base transition-colors duration-200 outline-none"
-        >{{ link }}</router-link
-      >
-    </span>
+    <template v-if="isAuthPage">
+      <div class="bg-text-secondary/10 mx-auto mt-8 mb-4 h-0.5 w-5/6" />
+      <span class="text-text-main/30 text-center text-sm">
+        {{ description }}
+        <router-link
+          v-if="to"
+          :to="to"
+          class="text-accent/70 hover:text-accent-lime focus:border-accent rounded-lg border-2 border-transparent p-1 text-base transition-colors duration-200 outline-none"
+          >{{ link }}</router-link
+        >
+      </span>
+    </template>
   </div>
 </template>
 
