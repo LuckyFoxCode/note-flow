@@ -42,6 +42,18 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/CategoryView.vue'),
   },
   {
+    path: '/statistics',
+    name: 'Statistics',
+    meta: { requiresAuth: true },
+    component: () => import('@/views/StatisticsView.vue'),
+  },
+  {
+    path: '/archive',
+    name: 'Archive',
+    meta: { requiresAuth: true },
+    component: () => import('@/views/ArchiveView.vue'),
+  },
+  {
     path: '/settings',
     name: 'Settings',
     meta: { requiresAuth: true },
