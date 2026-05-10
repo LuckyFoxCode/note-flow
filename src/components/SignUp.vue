@@ -12,7 +12,30 @@ const uiStore = useUiStore();
 const form = ref<SignUpData>({ username: '', email: '', password: '' });
 const inputRef = ref<HTMLInputElement | null>(null);
 
+const isValidate = () => {
+  const { username, email, password } = form.value;
+
+  if (username.trim().length < 2) {
+    uiStore.showToast('Username must be at least 2 characters', 'warning');
+    return false;
+  }
+
+  if (!email.trim() || !email.includes('@')) {
+    uiStore.showToast('Please enter a valid email address', 'warning');
+    return false;
+  }
+
+  if (password.length < 6) {
+    uiStore.showToast('Password must be at least 6 characters', 'warning');
+    return false;
+  }
+
+  return true;
+};
+
 const onSubmit = () => {
+  if (!isValidate()) return;
+
   const newUser: User = {
     ...form.value,
     id: crypto.randomUUID(),
