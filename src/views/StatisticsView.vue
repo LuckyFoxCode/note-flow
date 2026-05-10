@@ -1,6 +1,43 @@
 <script setup lang="ts">
-import { IconNote, IconRate, IconWidget } from '@/assets/icons';
+import { IconGauge, IconNote, IconRate, IconWidget } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
+import { useCategoryStore } from '@/store';
+import { computed } from 'vue';
+
+const categoryStore = useCategoryStore();
+
+const totalCategories = computed(() => categoryStore.categories.length);
+const totalNotes = computed(() => categoryStore.categories.flatMap((note) => note.categoryNotes));
+const completeNotes = totalNotes.value.filter((note) => note.completed).length;
+const rates = (completeNotes / totalNotes.value.length) * 100;
+
+const mostActiveCategory = computed(() => {
+  const categories = categoryStore.categories;
+
+  if (!categories.length) return '';
+
+  return categories.reduce((prev, current) => {
+    const prevCount = prev.categoryNotes?.length || 0;
+    const currentCount = current.categoryNotes?.length || 0;
+
+    return currentCount > prevCount ? current : prev;
+  }).name;
+});
+
+const categories = computed(() =>
+  categoryStore.categories.map((category) => {
+    return {
+      nameCategory: category.name,
+      colorCategory: category.categoryColor,
+      totalNotes: category.categoryNotes.length,
+      completed: category.categoryNotes.filter((n) => n.completed).length,
+    };
+  }),
+);
+
+const calculatePercentage = (completed: number, total: number): number => {
+  return Math.round((completed / total) * 100);
+};
 </script>
 
 <template>
@@ -8,59 +45,134 @@ import TheHeader from '@/components/TheHeader.vue';
     <TheHeader class="mb-5">
       <span>Statistics Page</span>
     </TheHeader>
-    <div class="grid grid-rows-4 px-2">
+    <div class="grid gap-y-3 px-2">
       <div class="flex flex-col">
         <h3 class="text-lg font-medium">NoteFlow Dashboard Statistics</h3>
         <p class="text-text-secondary text-sm">Friday, May 7, 2026, 13:43 PM</p>
       </div>
 
-      <div class="grid grid-cols-4 gap-x-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
         <div
-          class="border-border bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
+          class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
           <div class="bg-border flex size-12 items-center justify-center rounded-lg p-3">
             <IconWidget class="text-text-main/70 size-10" />
           </div>
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">total categories</span>
-            <span class="text-text-main text-lg font-medium">10</span>
+            <span class="text-text-main text-lg font-medium">{{ totalCategories }}</span>
           </div>
         </div>
 
         <div
-          class="border-border bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
+          class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
           <div class="bg-border flex size-12 items-center justify-center rounded-lg p-3">
             <IconNote class="text-text-main/70 size-10" />
           </div>
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">total notes</span>
-            <span class="text-text-main text-lg font-medium">100</span>
+            <span class="text-text-main text-lg font-medium">{{ totalNotes.length }}</span>
           </div>
         </div>
 
         <div
-          class="border-border bg-code-bg/50 shadow-code-bg flex items-center justify-between gap-x-3 rounded-lg border-2 p-5 shadow-md"
+          class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center justify-between gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">completion rate</span>
-            <span class="text-text-main text-lg font-medium">52%</span>
+            <span class="text-text-main text-lg font-medium">{{ Math.round(rates) }}%</span>
           </div>
-          <div class="bg-border flex size-12 items-center justify-center rounded-lg p-3">
-            <IconNote class="text-text-main/70 size-10" />
-          </div>
+          <IconGauge :percentage="Math.round(rates)" />
         </div>
 
         <div
-          class="border-border bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
+          class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
           <div class="bg-accent/10 flex size-12 items-center justify-center rounded-lg p-3">
             <IconRate class="text-accent/70 size-10" />
           </div>
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">most active category</span>
-            <span class="text-text-main text-lg font-medium capitalize">frontend essensials</span>
+            <span class="text-text-main text-lg font-medium capitalize">
+              {{ mostActiveCategory }}
+            </span>
           </div>
+        </div>
+      </div>
+
+      <div class="border-border bg-bg w-full overflow-hidden rounded-xl border shadow-sm">
+        <div class="border-border border-b px-6 py-4">
+          <h2 class="text-text-main text-lg font-semibold">Category Progress Details</h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-left">
+            <thead>
+              <tr class="border-border border-b text-sm text-slate-500">
+                <th class="px-6 py-3 font-medium">Name</th>
+                <th class="px-6 py-3 font-medium">Color Tag</th>
+                <th class="px-6 py-3 font-medium">Total Notes</th>
+                <th class="px-6 py-3 font-medium">Completed</th>
+                <th class="px-6 py-3 font-medium">Progress Bar</th>
+              </tr>
+            </thead>
+            <tbody class="divide-text-secondary divide-y">
+              <tr
+                v-for="category in categories"
+                :key="category.nameCategory"
+                class="hover:bg-code-bg transition-colors"
+              >
+                <td class="text-text-main/80 px-6 py-4 text-sm font-medium">
+                  {{ category.nameCategory }}
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="inline-flex items-center gap-2 rounded-full border px-2 py-1 font-mono text-xs"
+                    :style="{
+                      backgroundColor: `${category.colorCategory}15`,
+                      borderColor: `${category.colorCategory}30`,
+                    }"
+                  >
+                    <span
+                      class="h-2 w-2 rounded-full"
+                      :style="{ backgroundColor: category.colorCategory }"
+                    ></span>
+                    <span :style="{ color: category.colorCategory }">{{
+                      category.colorCategory
+                    }}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-sm text-slate-600">
+                  {{ category.totalNotes }}
+                </td>
+                <td class="px-6 py-4 text-sm text-slate-600">
+                  {{ category.completed }}
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex min-w-50 items-center gap-4">
+                    <div class="bg-bg relative h-2.5 w-full overflow-hidden rounded-full">
+                      <div
+                        class="absolute top-0 left-0 h-full transition-all duration-500"
+                        :style="{
+                          width: `${calculatePercentage(category.completed, category.totalNotes)}%`,
+                          backgroundColor: category.colorCategory,
+                        }"
+                      ></div>
+                    </div>
+                    <div
+                      class="text-text-main/50 flex items-center gap-2 text-xs font-medium whitespace-nowrap"
+                    >
+                      <span>{{ category.completed }}/{{ category.totalNotes }}</span>
+                      <span class="w-8 text-right"
+                        >{{ calculatePercentage(category.completed, category.totalNotes) }}%</span
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
