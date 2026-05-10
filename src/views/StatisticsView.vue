@@ -55,8 +55,8 @@ const calculatePercentage = (completed: number, total: number): number => {
         <div
           class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
-          <div class="bg-border flex size-12 items-center justify-center rounded-lg p-3">
-            <IconWidget class="text-text-main/70 size-10" />
+          <div class="flex size-12 items-center justify-center rounded-lg bg-amber-500/10 p-3">
+            <IconWidget class="size-10 text-amber-500/60" />
           </div>
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">total categories</span>
@@ -67,8 +67,8 @@ const calculatePercentage = (completed: number, total: number): number => {
         <div
           class="border-border/30 bg-code-bg/50 shadow-code-bg flex items-center gap-x-3 rounded-lg border-2 p-5 shadow-md"
         >
-          <div class="bg-border flex size-12 items-center justify-center rounded-lg p-3">
-            <IconNote class="text-text-main/70 size-10" />
+          <div class="flex size-12 items-center justify-center rounded-lg bg-pink-500/10 p-3">
+            <IconNote class="size-10 text-pink-500/60" />
           </div>
           <div class="flex flex-col">
             <span class="text-text-secondary text-sm capitalize">total notes</span>
@@ -108,8 +108,8 @@ const calculatePercentage = (completed: number, total: number): number => {
 
         <div class="overflow-x-auto">
           <table class="w-full border-collapse text-left">
-            <thead>
-              <tr class="border-border border-b text-sm text-slate-500">
+            <thead class="bg-code-bg/50">
+              <tr class="border-border text-text-main/80 border-b text-sm">
                 <th class="px-6 py-3 font-medium">Name</th>
                 <th class="px-6 py-3 font-medium">Color Tag</th>
                 <th class="px-6 py-3 font-medium">Total Notes</th>
@@ -117,18 +117,18 @@ const calculatePercentage = (completed: number, total: number): number => {
                 <th class="px-6 py-3 font-medium">Progress Bar</th>
               </tr>
             </thead>
-            <tbody class="divide-text-secondary divide-y">
+            <tbody class="divide-border divide-y">
               <tr
                 v-for="category in categories"
                 :key="category.nameCategory"
                 class="hover:bg-code-bg transition-colors"
               >
-                <td class="text-text-main/80 px-6 py-4 text-sm font-medium">
+                <td class="text-text-main/50 px-6 py-4 text-sm">
                   {{ category.nameCategory }}
                 </td>
                 <td class="px-6 py-4">
                   <div
-                    class="inline-flex items-center gap-2 rounded-full border px-2 py-1 font-mono text-xs"
+                    class="inline-flex items-center gap-2 rounded-full border-2 px-2 py-1 font-mono text-xs"
                     :style="{
                       backgroundColor: `${category.colorCategory}15`,
                       borderColor: `${category.colorCategory}30`,
@@ -138,20 +138,23 @@ const calculatePercentage = (completed: number, total: number): number => {
                       class="h-2 w-2 rounded-full"
                       :style="{ backgroundColor: category.colorCategory }"
                     ></span>
-                    <span :style="{ color: category.colorCategory }">{{
+                    <span :style="{ color: `${category.colorCategory}95` }">{{
                       category.colorCategory
                     }}</span>
                   </div>
                 </td>
-                <td class="px-6 py-4 text-sm text-slate-600">
+                <td class="text-text-main/50 px-6 py-4 text-sm">
                   {{ category.totalNotes }}
                 </td>
-                <td class="px-6 py-4 text-sm text-slate-600">
+                <td class="text-text-main/50 px-6 py-4 text-sm">
                   {{ category.completed }}
                 </td>
                 <td class="px-6 py-4">
                   <div class="flex min-w-50 items-center gap-4">
-                    <div class="bg-bg relative h-2.5 w-full overflow-hidden rounded-full">
+                    <div
+                      class="relative h-2.5 w-full overflow-hidden rounded-full"
+                      :style="{ background: `${category.colorCategory}30` }"
+                    >
                       <div
                         class="absolute top-0 left-0 h-full transition-all duration-500"
                         :style="{
