@@ -53,6 +53,16 @@ body {
   --breakpoint-3xl: 130rem;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE и Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 body {
   @apply font-rubik bg-bg text-text-main;
 }
