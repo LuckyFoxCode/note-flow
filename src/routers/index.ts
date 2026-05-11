@@ -79,7 +79,7 @@ router.beforeEach(async (to, from, next) => {
   const requiresGuest = to.matched.some((record) => record.meta.requiresGuest);
 
   if (requiresAuth && !isAuthenticated) {
-    next({ name: 'Auth' });
+    next({ name: 'SignIn' });
   } else if (requiresGuest && isAuthenticated) {
     next({ name: 'Home' });
   } else {
