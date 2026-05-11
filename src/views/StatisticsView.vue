@@ -35,6 +35,19 @@ const categories = computed(() =>
   }),
 );
 
+interface TableHeader {
+  label: string;
+  key: string;
+}
+
+const tableHeaders: TableHeader[] = [
+  { label: 'Name', key: 'name' },
+  { label: 'Color Tag', key: 'color' },
+  { label: 'Total Notes', key: 'total' },
+  { label: 'Completed', key: 'completed' },
+  { label: 'Progress Bar', key: 'progress' },
+];
+
 const calculatePercentage = (completed: number, total: number): number => {
   return Math.round((completed / total) * 100);
 };
@@ -101,20 +114,24 @@ const calculatePercentage = (completed: number, total: number): number => {
         </div>
       </div>
 
-      <div class="border-border bg-bg w-full overflow-hidden rounded-xl border shadow-sm">
-        <div class="border-border border-b px-6 py-4">
+      <div
+        class="border-border/30 bg-bg hidden w-full overflow-hidden rounded-xl border-2 shadow-sm md:inline"
+      >
+        <div class="border-border border-b px-3 py-4 lg:px-6">
           <h2 class="text-text-main text-lg font-semibold">Category Progress Details</h2>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="">
           <table class="w-full border-collapse text-left">
             <thead class="bg-code-bg/50">
               <tr class="border-border text-text-main/80 border-b text-sm">
-                <th class="px-6 py-3 font-medium">Name</th>
-                <th class="px-6 py-3 font-medium">Color Tag</th>
-                <th class="px-6 py-3 font-medium">Total Notes</th>
-                <th class="px-6 py-3 font-medium">Completed</th>
-                <th class="px-6 py-3 font-medium">Progress Bar</th>
+                <th
+                  v-for="header in tableHeaders"
+                  :key="header.key"
+                  class="border-border/20 px-1.5 py-2.5 text-center font-medium not-last:border-r-2 first:text-left last:text-left xl:px-6 xl:py-4"
+                >
+                  {{ header.label }}
+                </th>
               </tr>
             </thead>
             <tbody class="divide-border divide-y">
@@ -123,12 +140,12 @@ const calculatePercentage = (completed: number, total: number): number => {
                 :key="category.nameCategory"
                 class="hover:bg-code-bg transition-colors"
               >
-                <td class="text-text-main/50 px-6 py-4 text-sm">
+                <td class="text-text-main/50 px-1.5 py-2.5 text-sm xl:px-6 xl:py-4">
                   {{ category.nameCategory }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-1.5 py-2.5 xl:px-6 xl:py-4">
                   <div
-                    class="inline-flex items-center gap-2 rounded-full border-2 px-2 py-1 font-mono text-xs"
+                    class="mx-auto flex w-fit items-center gap-2 rounded-full border-2 px-2 py-1 font-mono text-xs"
                     :style="{
                       backgroundColor: `${category.colorCategory}15`,
                       borderColor: `${category.colorCategory}30`,
@@ -143,13 +160,13 @@ const calculatePercentage = (completed: number, total: number): number => {
                     }}</span>
                   </div>
                 </td>
-                <td class="text-text-main/50 px-6 py-4 text-sm">
+                <td class="text-text-main/50 px-1.5 py-2.5 text-center text-sm xl:px-6 xl:py-4">
                   {{ category.totalNotes }}
                 </td>
-                <td class="text-text-main/50 px-6 py-4 text-sm">
+                <td class="text-text-main/50 px-1.5 py-2.5 text-center text-sm xl:px-6 xl:py-4">
                   {{ category.completed }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-1.5 py-2.5 xl:px-6 xl:py-4">
                   <div class="flex min-w-50 items-center gap-4">
                     <div
                       class="relative h-2.5 w-full overflow-hidden rounded-full"
