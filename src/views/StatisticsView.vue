@@ -2,9 +2,40 @@
 import { IconGauge, IconNote, IconRate, IconWidget } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
 import { useCategoryStore } from '@/store';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const categoryStore = useCategoryStore();
+
+const currentTime = ref('');
+let timer: ReturnType<typeof setInterval>;
+
+const updateTime = () => {
+  const now = new Date();
+
+  const datePart = Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(now);
+
+  const dateTime = Intl.DateTimeFormat('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  }).format(now);
+
+  currentTime.value = `${datePart}, ${dateTime}`;
+};
+
+onMounted(() => {
+  updateTime();
+
+  timer = setInterval(updateTime, 60000);
+});
+onUnmounted(() => {
+  if (timer) clearInterval(timer);
+});
 
 const totalCategories = computed(() => categoryStore.categories.length);
 const totalNotes = computed(() => categoryStore.categories.flatMap((note) => note.categoryNotes));
@@ -61,7 +92,7 @@ const calculatePercentage = (completed: number, total: number): number => {
     <div class="grid gap-y-3 px-2">
       <div class="flex flex-col">
         <h3 class="text-lg font-medium">NoteFlow Dashboard Statistics</h3>
-        <p class="text-text-secondary text-sm">Friday, May 7, 2026, 13:43 PM</p>
+        <p class="text-text-secondary text-sm">{{ currentTime }}</p>
       </div>
 
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
