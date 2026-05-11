@@ -2,9 +2,105 @@
 import { IconGauge, IconNote, IconRate, IconWidget } from '@/assets/icons';
 import TheHeader from '@/components/TheHeader.vue';
 import { useCategoryStore } from '@/store';
+import {
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+  type ChartData,
+  type ChartOptions,
+} from 'chart.js';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { Bar, Doughnut } from 'vue-chartjs';
+
+ChartJS.register(ArcElement, Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale);
 
 const categoryStore = useCategoryStore();
+
+const windowWidth = ref(window.innerWidth);
+
+const updateWidth = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => window.addEventListener('resize', updateWidth));
+onUnmounted(() => window.removeEventListener('resize', updateWidth));
+
+const fontSize = computed(() => {
+  if (windowWidth.value < 768) return 14;
+  return 16;
+});
+
+const chartData = computed<ChartData<'doughnut'>>(() => ({
+  labels: categoryStore.categories.map((category) => category.name),
+  datasets: [
+    {
+      backgroundColor: categoryStore.categories.map((category) => category.categoryColor),
+      data: categoryStore.categories.map((category) => category.categoryNotes.length),
+    },
+  ],
+}));
+
+const chartOptions: ChartOptions<'doughnut'> = {
+  responsive: true,
+  maintainAspectRatio: false,
+  cutout: '40%',
+  plugins: {
+    legend: {
+      position: 'right',
+      labels: {
+        boxWidth: 10,
+        boxHeight: 10,
+        usePointStyle: true,
+        pointStyle: 'circle',
+        font: {
+          size: fontSize.value,
+        },
+      },
+    },
+  },
+};
+
+const barData = computed<ChartData<'bar'>>(() => ({
+  labels: ['Easy', 'Medium', 'Hard'],
+  datasets: [
+    {
+      label: 'Priority',
+      data: [44, 30, 19],
+      backgroundColor: ['#00c7be', '#ff9500', '#ff453a'],
+      borderRadius: 4,
+    },
+  ],
+}));
+
+const barOptions: ChartOptions<'bar'> = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      grid: {
+        display: true,
+        drawTicks: false,
+        color: '#2c2c2e',
+      },
+    },
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+  },
+};
 
 const currentTime = ref('');
 let timer: ReturnType<typeof setInterval>;
@@ -142,6 +238,21 @@ const calculatePercentage = (completed: number, total: number): number => {
               {{ mostActiveCategory }}
             </span>
           </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div class="border-border/30 w-full rounded-lg border-2 py-2">
+          <Doughnut
+            :data="chartData"
+            :options="chartOptions"
+          />
+        </div>
+        <div class="border-border w-full rounded-lg border-2">
+          <Bar
+            :data="barData"
+            :options="barOptions"
+          />
         </div>
       </div>
 
