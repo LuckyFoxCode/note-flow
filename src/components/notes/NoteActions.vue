@@ -2,11 +2,13 @@
 import { IconArchive, IconChecked, IconPen, IconPin } from '@/assets/icons';
 import { useCategoryStore, useUiStore } from '@/store';
 import type { Note } from '@/types';
+import { useRoute } from 'vue-router';
 
 const props = defineProps<{
   note: Note;
 }>();
 
+const route = useRoute();
 const uiStore = useUiStore();
 const categoriesStore = useCategoryStore();
 </script>
@@ -14,6 +16,7 @@ const categoriesStore = useCategoryStore();
 <template>
   <div class="flex items-center gap-x-1">
     <IconPen
+      v-if="route.name === 'Category'"
       class="hover:text-accent-lime text-text-secondary/70 size-5 cursor-pointer transition-colors duration-200"
       @click="uiStore.openOverlay('note', props.note)"
     />

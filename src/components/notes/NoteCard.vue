@@ -7,7 +7,7 @@ import NoteTag from './NoteTag.vue';
 
 const props = defineProps<{
   note: Note;
-  getDayLabel: (dateStr: string) => string;
+  getDayLabel?: (dateStr: string) => string;
 }>();
 
 const isEditedNote = (note: Note) => {
@@ -37,11 +37,11 @@ const isEditedNote = (note: Note) => {
       </div>
       <div class="flex w-full gap-x-1">
         <span
-          v-if="isEditedNote(props.note)"
+          v-if="isEditedNote(props.note) && props.getDayLabel"
           class="text-text-secondary/30 flex w-fit items-center text-xs"
         >
           <IconPen class="mr-0.5 size-3" />
-          {{ getDayLabel(props.note.updatedAt) }}
+          {{ props.getDayLabel(props.note.updatedAt) }}
         </span>
         <ul class="flex w-full items-center justify-end gap-x-1">
           <NoteTag
