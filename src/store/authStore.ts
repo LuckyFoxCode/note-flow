@@ -1,6 +1,6 @@
 import type { AuthResponse, SignInData, User } from '@/types';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 export const useAuthStore = defineStore(
   'auth',
@@ -37,9 +37,25 @@ export const useAuthStore = defineStore(
       localStorage.removeItem('token');
     }
 
+    function edit(currUser: User) {
+      currentUser.value = currUser;
+      users.value = users.value.map((user) => (user.id === currUser.id ? currUser : user));
+    }
+
+    watch(
+      currentUser,
+      (newUser) => {
+        if (newUser) {
+          users.value = users.value.map((user) => (user.id === newUser.id ? { ...newUser } : user));
+        }
+      },
+      { deep: true },
+    );
+
     return {
       users,
       currentUser,
+      edit,
       login,
       remove,
       register,
