@@ -148,6 +148,7 @@ watch(
       <BaseButton
         title="submit"
         type="submit"
+        class="text-text-secondary"
         :disabled="!isValidForm"
       />
     </form>

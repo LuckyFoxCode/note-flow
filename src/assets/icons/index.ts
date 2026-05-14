@@ -11,6 +11,7 @@ export { default as IconFox } from './IconFox.vue';
 export { default as IconGauge } from './IconGauge.vue';
 export { default as IconHome } from './IconHome.vue';
 export { default as IconInfo } from './IconInfo.vue';
+export { default as IconKey } from './IconKey.vue';
 export { default as IconLetter } from './IconLetter.vue';
 export { default as IconLock } from './IconLock.vue';
 export { default as IconLogo } from './IconLogo.vue';

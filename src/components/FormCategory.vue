@@ -83,6 +83,7 @@ onMounted(() => {
       <BaseButton
         title="submit"
         type="submit"
+        class="text-text-secondary"
         :disabled="categoryValue.length < 1"
       />
     </form>

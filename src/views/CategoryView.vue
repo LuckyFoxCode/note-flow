@@ -94,7 +94,7 @@ const timelineData = computed(() => {
       <BaseButton
         title="add note"
         type="button"
-        class="w-full md:w-fit"
+        class="text-text-secondary w-full md:w-fit"
         @click="uiStore.openOverlay('note', null)"
       />
       <BaseSelect v-model="categoriesStore.noteSort">

@@ -85,6 +85,7 @@ onMounted(() => {
         placeholder="Password"
       />
       <BaseButton
+        class="text-text-secondary"
         title="submit"
         type="submit"
       />

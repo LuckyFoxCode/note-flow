@@ -20,6 +20,7 @@ const categoryStore = useCategoryStore();
     <EntityActionBar>
       <BaseButton
         title="add category"
+        class="text-text-secondary"
         type="button"
         @click="uiStore.openOverlay('category')"
       />

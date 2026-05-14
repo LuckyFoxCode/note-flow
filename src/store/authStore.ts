@@ -42,6 +42,12 @@ export const useAuthStore = defineStore(
       users.value = users.value.map((user) => (user.id === currUser.id ? currUser : user));
     }
 
+    function updateAvatar(url: string) {
+      if (!currentUser.value) return;
+
+      currentUser.value.avatarUrl = url;
+    }
+
     watch(
       currentUser,
       (newUser) => {
@@ -59,6 +65,7 @@ export const useAuthStore = defineStore(
       login,
       remove,
       register,
+      updateAvatar,
     };
   },
   {
