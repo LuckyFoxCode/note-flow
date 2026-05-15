@@ -1,6 +1,7 @@
 export { default as IconArchive } from './IconArchive.vue';
 export { default as IconArrowLeft } from './IconArrowLeft.vue';
 export { default as IconBurger } from './IconBurger.vue';
+export { default as IconCamera } from './IconCamera.vue';
 export { default as IconChart } from './IconChart.vue';
 export { default as IconChecked } from './IconChecked.vue';
 export { default as IconCircle } from './IconCircle.vue';

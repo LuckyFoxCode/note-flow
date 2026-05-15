@@ -48,6 +48,12 @@ export const useAuthStore = defineStore(
       currentUser.value.avatarUrl = url;
     }
 
+    function removeAvatar() {
+      if (!currentUser.value) return;
+
+      currentUser.value.avatarUrl = '';
+    }
+
     watch(
       currentUser,
       (newUser) => {
@@ -66,6 +72,7 @@ export const useAuthStore = defineStore(
       remove,
       register,
       updateAvatar,
+      removeAvatar,
     };
   },
   {

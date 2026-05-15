@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { IconPen } from '@/assets/icons';
 import { computed, nextTick, ref, type Component } from 'vue';
 
 interface Props {
@@ -42,33 +41,28 @@ async function toggleEdit() {
 </script>
 
 <template>
-  <div class="text-text-secondary/50 flex flex-col">
-    <span class="text-lg">{{ label }}:</span>
+  <div class="text-text-secondary/50 bg-border/30 flex flex-col rounded-lg px-1 md:px-2">
+    <span class="md:text-lg">{{ label }}:</span>
     <div class="flex justify-between">
-      <div class="flex items-center gap-x-0.5">
+      <div class="flex items-center md:gap-x-0.5">
         <component
           :is="labelIcon"
-          class="size-6"
+          class="size-4 md:size-6"
         />
         <input
           ref="inputRef"
           v-model.lazy="model"
           :type="inputType"
           :disabled="!isEdited"
-          class="text-text-main/70 focus:border-accent rounded-md border-b-2 border-transparent px-1 text-lg transition-colors duration-200 outline-none"
+          class="text-text-main/70 focus:border-accent rounded-md border-b-2 border-transparent px-1 transition-colors duration-200 outline-none md:text-lg"
           @keydown.enter.prevent="toggleEdit"
         />
       </div>
 
       <button
-        class="focus:border-accent hover:border-accent-lime flex cursor-pointer items-center gap-x-2 rounded-lg border-2 border-transparent px-1 py-0.5 transition-colors duration-200 outline-none"
+        class="focus:border-accent hover:border-accent-lime flex cursor-pointer items-center gap-x-2 rounded-lg border-2 border-transparent px-1 py-0.5 text-sm transition-colors duration-200 outline-none md:text-base"
         @click="toggleEdit"
       >
-        <IconPen
-          v-if="!isPasswordField || isEdited"
-          class="size-4"
-        />
-        <!-- true                             1                                   2 -->
         {{ isPasswordField ? (isEdited ? 'Save' : 'Change password') : isEdited ? 'Save' : 'Edit' }}
       </button>
     </div>
