@@ -1,41 +1,12 @@
 <script setup lang="ts">
 import { CategoryTable, ChartsSection, StatsDashboard } from '@/components/statistics';
 import TheHeader from '@/components/TheHeader.vue';
+import { useDateTime } from '@/composables';
 import { useCategoryStore } from '@/store';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed } from 'vue';
 
 const categoryStore = useCategoryStore();
-
-const currentTime = ref('');
-let timer: ReturnType<typeof setInterval>;
-
-const updateTime = () => {
-  const now = new Date();
-
-  const datePart = Intl.DateTimeFormat('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(now);
-
-  const dateTime = Intl.DateTimeFormat('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  }).format(now);
-
-  currentTime.value = `${datePart}, ${dateTime}`;
-};
-
-onMounted(() => {
-  updateTime();
-
-  timer = setInterval(updateTime, 60000);
-});
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
-});
+const { currentTime } = useDateTime();
 
 const totalNotes = computed(() => categoryStore.categories.flatMap((note) => note.categoryNotes));
 </script>
