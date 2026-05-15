@@ -19,7 +19,7 @@ function logout() {
     <slot />
     <div class="flex items-center gap-x-2">
       <div
-        class="avatar border-border/80 flex size-7 items-center justify-center overflow-hidden rounded-full border-2"
+        class="avatar border-accent-lime/30 flex size-7 items-center justify-center overflow-hidden rounded-full border"
       >
         <img
           v-if="authStore.currentUser?.avatarUrl"
