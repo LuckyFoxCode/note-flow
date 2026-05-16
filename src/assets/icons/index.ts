@@ -1,3 +1,4 @@
+export { default as IconAddFolder } from './IconAddFolder.vue';
 export { default as IconArchive } from './IconArchive.vue';
 export { default as IconArrowLeft } from './IconArrowLeft.vue';
 export { default as IconBurger } from './IconBurger.vue';
