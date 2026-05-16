@@ -15,11 +15,19 @@ defineProps<{
   >
     <div
       class="flex w-full items-center gap-x-2"
-      :style="color ? { '--card-color': `var(--color-${color})` } : {}"
+      :style="color ? { '--card-color': color } : {}"
     >
       <div
         v-if="icon"
-        class="flex size-12 items-center justify-center rounded-lg bg-(--card-color)/10 p-3 text-(--card-color)/50"
+        class="flex size-12 items-center justify-center rounded-lg p-3"
+        :style="
+          color
+            ? {
+                backgroundColor: `color-mix(in srgb, ${color} 10%, transparent)`,
+                color: `color-mix(in srgb, ${color} 50%, transparent)`,
+              }
+            : {}
+        "
       >
         <component
           :is="icon"

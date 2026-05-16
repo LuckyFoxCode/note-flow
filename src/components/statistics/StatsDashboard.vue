@@ -12,8 +12,13 @@ const props = defineProps<{
 const categoryStore = useCategoryStore();
 
 const totalCategories = computed(() => categoryStore.categories.length);
-const completeNotes = props.totalNotes.filter((note) => note.completed).length;
-const rates = (completeNotes / props.totalNotes.length) * 100;
+
+const rates = computed(() => {
+  if (!props.totalNotes.length) return 0;
+
+  const completeNotes = props.totalNotes.filter((note) => note.completed).length;
+  return (completeNotes / props.totalNotes.length) * 100;
+});
 
 const mostActiveCategory = computed(() => {
   const categories = categoryStore.categories;
@@ -35,14 +40,14 @@ const mostActiveCategory = computed(() => {
       title="total categories"
       :description="totalCategories"
       :icon="IconWidget"
-      color="amber-500"
+      color="var(--color-amber-500)"
     />
 
     <StatCard
       title="total notes"
       :description="totalNotes.length"
       :icon="IconNote"
-      color="pink-500"
+      color="var(--color-pink-500)"
     />
 
     <StatCard
@@ -56,7 +61,7 @@ const mostActiveCategory = computed(() => {
       title="most active category"
       :description="mostActiveCategory"
       :icon="IconRate"
-      color="accent"
+      color="var(--color-accent)"
     />
   </div>
 </template>
